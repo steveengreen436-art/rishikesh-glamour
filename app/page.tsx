@@ -15,53 +15,72 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-black text-white selection:bg-cyan-400 selection:text-black">
+    <main style={{ backgroundColor: '#020205', color: '#ffffff', minHeight: '100vh', fontFamily: 'sans-serif', padding: '0 20px 80px 20px' }}>
       
       {/* Hero Section */}
-      <div className="relative overflow-hidden py-24 md:py-36 text-center px-6 border-b border-gray-900">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-cyan-900/20 via-black to-black pointer-events-none"></div>
-        <span className="text-xs tracking-[0.3em] uppercase text-cyan-400 font-bold mb-4 block">Rishikesh, Uttarakhand • The Spiritual Luxury</span>
-        <h1 className="text-5xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-white to-purple-500 mb-6 tracking-tight">
+      <div style={{ textAlign: 'center', padding: '80px 20px', maxWidth: '900px', margin: '0 auto' }}>
+        <span style={{ color: '#22d3ee', fontSize: '14px', letterSpacing: '4px', textTransform: 'uppercase', fontWeight: 'bold' }}>
+          Rishikesh, Uttarakhand • The Spiritual Luxury Sanctuary
+        </span>
+        <h1 style={{ fontSize: 'clamp(40px, 8vw, 75px)', fontWeight: '900', margin: '20px 0', background: 'linear-gradient(to right, #22d3ee, #ffffff, #c084fc)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
           Rishikesh Majesty
         </h1>
-        <p className="text-lg md:text-2xl text-gray-400 max-w-2xl mx-auto italic font-light mb-10">
-          Where supreme modern luxury meets the timeless flow of the holy Ganges. Experience perfection.
+        <p style={{ fontSize: '20px', color: '#9ca3af', fontStyle: 'italic', lineHeight: '1.6', marginBottom: '40px' }}>
+          Where supreme modern luxury meets the timeless flow of the holy Ganges. Impeccable cleanliness, personalized service, and absolute perfection.
         </p>
-        <div className="flex flex-wrap justify-center gap-4">
-          <button className="bg-cyan-400 text-black font-extrabold px-8 py-4 rounded-full hover:bg-white shadow-[0_0_30px_rgba(34,211,238,0.4)] transition-all">
-            Explore Suites
+        <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <button style={{ backgroundColor: '#22d3ee', color: '#000000', fontWeight: 'bold', padding: '16px 36px', borderRadius: '50px', border: 'none', cursor: 'pointer', boxShadow: '0 0 25px rgba(34,211,238,0.5)', fontSize: '16px' }}>
+            Explore Luxury Suites
           </button>
-          <button className="border border-cyan-500/40 text-cyan-300 px-8 py-4 rounded-full hover:bg-cyan-950/40 transition-all">
-            Romantic Getaways
+          <button style={{ backgroundColor: 'transparent', color: '#22d3ee', border: '2px solid rgba(34,211,238,0.5)', padding: '16px 36px', borderRadius: '50px', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold' }}>
+            Romantic Getaways ✨
           </button>
         </div>
       </div>
 
-      {/* Database / Reviews Section */}
-      <section className="max-w-6xl mx-auto px-6 py-20">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-black text-white mb-3">Glowing Testimonial & Data Stream</h2>
-          <p className="text-gray-400 text-sm">Real reviews and luxury blogs dynamically synced from your cloud database.</p>
+      {/* Highlights Bar */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px', maxWidth: '1000px', margin: '0 auto 60px auto', textAlign: 'center' }}>
+        <div style={{ background: '#0b0f19', border: '1px solid #1e293b', padding: '25px', borderRadius: '20px' }}>
+          <h3 style={{ color: '#22d3ee', fontSize: '18px', marginBottom: '8px' }}>✨ Ultra Clean & Modern</h3>
+          <p style={{ color: '#9ca3af', fontSize: '14px' }}>Immaculate daily sanitization, contemporary aesthetic, and glowing ambiance.</p>
+        </div>
+        <div style={{ background: '#0b0f19', border: '1px solid #1e293b', padding: '25px', borderRadius: '20px' }}>
+          <h3 style={{ color: '#c084fc', fontSize: '18px', marginBottom: '8px' }}>💖 Romantic Getaway Specials</h3>
+          <p style={{ color: '#9ca3af', fontSize: '14px' }}>Candle-lit riverside dinners, rose petal decorations, and couples spa packages.</p>
+        </div>
+        <div style={{ background: '#0b0f19', border: '1px solid #1e293b', padding: '25px', borderRadius: '20px' }}>
+          <h3 style={{ color: '#34d399', fontSize: '18px', marginBottom: '8px' }}>🧘 Free Sunrise Yoga</h3>
+          <p style={{ color: '#9ca3af', fontSize: '14px' }}>Private master yoga sessions right on the banks of the holy Ganges.</p>
+        </div>
+      </div>
+
+      {/* Testimonials & Data Stream */}
+      <section style={{ maxWidth: '1100px', margin: '0 auto' }}>
+        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+          <h2 style={{ fontSize: '32px', fontWeight: 'bold', marginBottom: '10px' }}>Flooded Reviews & Luxury Testimonials</h2>
+          <p style={{ color: '#9ca3af' }}>Real feedback from guests who experienced supreme comfort and personalized hospitality.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '25px' }}>
           {content.map((item) => (
-            <div key={item.id} className="p-8 border border-cyan-900/60 rounded-3xl bg-gray-950 hover:border-cyan-400 transition-all shadow-[0_0_25px_rgba(34,211,238,0.08)] flex flex-col justify-between">
+            <div key={item.id} style={{ background: '#090d16', border: '1px solid #1e3a8a', padding: '30px', borderRadius: '24px', boxShadow: '0 0 20px rgba(34,211,238,0.07)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
               <div>
-                <span className="text-[10px] uppercase tracking-widest text-cyan-400 font-bold block mb-2">{item.category || 'Review'}</span>
-                <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
-                <p className="text-gray-300 text-sm leading-relaxed mb-6">"{item.description}"</p>
+                <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '2px', color: '#22d3ee', fontWeight: 'bold', display: 'block', marginBottom: '10px' }}>
+                  {item.category || 'Review'} • Rating: {item.rating}★
+                </span>
+                <h3 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '12px', color: '#ffffff' }}>{item.title}</h3>
+                <p style={{ color: '#d1d5db', fontSize: '15px', lineHeight: '1.6', marginBottom: '20px' }}>"{item.description}"</p>
               </div>
-              <div className="border-t border-gray-900 pt-4 flex justify-between items-center">
-                <span className="text-sm font-bold text-purple-400">— {item.author}</span>
-                <span className="text-yellow-400 text-sm">★★★★★</span>
+              <div style={{ borderTop: '1px solid #1f2937', paddingTop: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ color: '#c084fc', fontWeight: 'bold', fontSize: '14px' }}>— {item.author}</span>
+                <span style={{ color: '#facc15', fontSize: '16px' }}>★★★★★</span>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Embedded Floating Smart AI Chatbot */}
+      {/* Floating Smart Multilingual AI Chatbot Component */}
       <AIChatbot />
 
     </main>
