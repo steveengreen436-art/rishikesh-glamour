@@ -2,7 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-color: #000;
-  color: #fff;
+@layer base {
+  body {
+    background-color: #030712;
+    color: #f3f4f6;
+    font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+  }
 }
