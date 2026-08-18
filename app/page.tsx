@@ -250,61 +250,61 @@ export default function Home() {
           
           {/* Image 1 */}
           <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/home page image 2_4.jpg" alt="Nighttime City Panorama" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
+            <img src="/home page image 2.jpg" alt="Nighttime City Panorama" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
             <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Nighttime Valley View</div>
           </div>
 
           {/* Image 2 */}
           <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/home page image 1_4.jpg" alt="Twilight Property Aerial" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
+            <img src="/home page image 1.jpg" alt="Twilight Property Aerial" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
             <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Twilight Aerial View</div>
           </div>
 
           {/* Image 3 */}
           <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/1000013862_3.jpg" alt="Misty Mountain Day View" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
+            <img src="/1000013862.jpg" alt="Misty Mountain Day View" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
             <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Misty Mountain Morning</div>
           </div>
 
           {/* Image 4 */}
           <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/1000013863_3.jpg" alt="Valley Outlook" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
+            <img src="/1000013863.jpg" alt="Valley Outlook" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
             <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Scenic Valley Outlook</div>
           </div>
 
           {/* Image 5 */}
           <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/1000013860_3.jpg" alt="Guest on Property" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
+            <img src="/1000013860.jpg" alt="Guest on Property" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
             <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Resort Grounds & Seating</div>
           </div>
 
           {/* Image 6 */}
           <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/1000013866_3.jpg" alt="Individual Dome Exterior" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
+            <img src="/1000013866.jpg" alt="Individual Dome Exterior" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
             <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Geodesic Dome Exterior</div>
           </div>
 
           {/* Image 7 */}
           <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/1000013867_3.jpg" alt="Yellow Dome Bed Setup" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
+            <img src="/1000013867.jpg" alt="Yellow Dome Bed Setup" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
             <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Yellow Suite Bed Setup</div>
           </div>
 
           {/* Image 8 */}
           <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/1000013859_3.jpg" alt="Yellow Dome Interior and Chairs" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
+            <img src="/1000013859.jpg" alt="Yellow Dome Interior and Chairs" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
             <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Yellow Suite Lounge Area</div>
           </div>
 
           {/* Image 9 */}
           <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/1000013865_3.jpg" alt="Teal Dome Bed and Seating" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
+            <img src="/1000013865.jpg" alt="Teal Dome Bed and Seating" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
             <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Teal Suite Master Bed</div>
           </div>
 
           {/* Image 10 */}
           <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/1000013870_2.jpg" alt="Teal Dome Bedroom and Windows" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
+            <img src="/1000013870.jpg" alt="Teal Dome Bedroom and Windows" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
             <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Teal Suite Panorama Windows</div>
           </div>
 
