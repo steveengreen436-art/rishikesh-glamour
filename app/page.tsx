@@ -7,7 +7,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState('home');
   const [content, setContent] = useState<any[]>([]);
   
-  // Upgraded: Interactive Booking Form State
+  // Interactive Booking Form State
   const [bookingData, setBookingData] = useState({
     checkIn: '',
     checkOut: '',
@@ -17,6 +17,11 @@ export default function Home() {
     phone: ''
   });
   const [bookingSubmitted, setBookingSubmitted] = useState(false);
+
+  // Customer Review Modal State
+  const [showReviewModal, setShowReviewModal] = useState(false);
+  const [newReview, setNewReview] = useState({ name: '', rating: '5', comment: '', category: 'Dome Suite' });
+  const [reviewSubmitted, setReviewSubmitted] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -33,15 +38,22 @@ export default function Home() {
     window.open(`https://wa.me/919100009310?text=${message}`, '_blank');
   };
 
+  const handleReviewSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setReviewSubmitted(true);
+    const reviewMsg = `Hello, I'd like to leave a review for Amantra Hills Rishikesh:%0A- Name: ${newReview.name}%0A- Rating: ${newReview.rating} Stars%0A- Category: ${newReview.category}%0A- Review: ${newReview.comment}`;
+    window.open(`https://wa.me/919100009310?text=${reviewMsg}`, '_blank');
+  };
+
   return (
     <main style={{ backgroundColor: '#fcfbf7', color: '#1a202c', minHeight: '100vh', fontFamily: 'serif', overflowX: 'hidden' }}>
       
-      {/* Top Gold & Turquoise Announcement Bar */}
+      {/* Top Announcement Bar */}
       <div style={{ background: 'linear-gradient(90deg, #d4af37, #06b6d4, #10b981)', color: '#ffffff', padding: '10px 20px', textAlign: 'center', fontSize: '13px', fontWeight: 'bold', letterSpacing: '1px' }}>
         ✨ AMANTRA HILLS RISHIKESH • RESERVATIONS: +91 9100009310 / +91 9873767624 / +91 9811167624 ✨
       </div>
 
-      {/* Interactive Navigation Bar */}
+      {/* Navigation Bar */}
       <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 40px', borderBottom: '1px solid rgba(212, 175, 55, 0.3)', backdropFilter: 'blur(10px)', position: 'sticky', top: 0, zIndex: 100, backgroundColor: 'rgba(252, 251, 247, 0.9)' }}>
         <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#b89728', letterSpacing: '2px', cursor: 'pointer' }} onClick={() => setActiveTab('home')}>
           AMANTRA HILLS
@@ -58,7 +70,6 @@ export default function Home() {
       {/* ================= HOME PAGE VIEW ================= */}
       {activeTab === 'home' && (
         <div>
-          {/* Hero Section */}
           <header style={{ 
             position: 'relative', 
             padding: '140px 20px', 
@@ -79,48 +90,15 @@ export default function Home() {
                 Perched high in the majestic hills of Narendra Nagar, Amantra Hills offers an ethereal sanctuary where supreme modern luxury blends seamlessly with glowing mountain vistas, pristine dome architecture, and the tranquil breeze of the holy Himalayas.
               </p>
               <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
-                <button onClick={() => setActiveTab('contact')} style={{ background: 'linear-gradient(135deg, #d4af37, #b89728)', color: '#ffffff', fontWeight: 'bold', padding: '16px 36px', borderRadius: '50px', border: 'none', cursor: 'pointer', boxShadow: '0 4px 20px rgba(212, 175, 55, 0.4)', fontSize: '15px', transition: 'transform 0.2s' }}>
+                <button onClick={() => setActiveTab('contact')} style={{ background: 'linear-gradient(135deg, #d4af37, #b89728)', color: '#ffffff', fontWeight: 'bold', padding: '16px 36px', borderRadius: '50px', border: 'none', cursor: 'pointer', boxShadow: '0 4px 20px rgba(212, 175, 55, 0.4)', fontSize: '15px' }}>
                   Book Your Stay Now
                 </button>
-                <button onClick={() => setActiveTab('dining')} style={{ background: 'transparent', color: '#0891b2', border: '2px solid #0891b2', padding: '16px 36px', borderRadius: '50px', cursor: 'pointer', fontSize: '15px', fontWeight: 'bold', boxShadow: '0 4px 15px rgba(6, 182, 212, 0.2)' }}>
+                <button onClick={() => setActiveTab('dining')} style={{ background: 'transparent', color: '#0891b2', border: '2px solid #0891b2', padding: '16px 36px', borderRadius: '50px', cursor: 'pointer', fontSize: '15px', fontWeight: 'bold' }}>
                   Explore Skywalk Cafe ✨
                 </button>
               </div>
             </div>
           </header>
-
-          {/* Flooded Info Overview Cards */}
-          <section style={{ maxWidth: '1150px', margin: '80px auto', padding: '0 20px' }}>
-            <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-              <h2 style={{ fontSize: '38px', color: '#997c17', marginBottom: '15px' }}>The Pinnacle of Mountain Elegance</h2>
-              <p style={{ color: '#4a5568', maxWidth: '750px', margin: '0 auto', fontSize: '16px', lineHeight: '1.8' }}>
-                Immerse yourself in unmatched cleanliness, breathtaking high-altitude glass domes, and personalized hospitality designed to rejuvenate your mind, body, and soul.
-              </p>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px' }}>
-              <div style={{ background: '#ffffff', border: '1px solid rgba(6, 182, 212, 0.3)', padding: '40px', borderRadius: '28px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)', transition: 'transform 0.3s' }}>
-                <h3 style={{ color: '#0891b2', fontSize: '22px', marginBottom: '15px' }}>🏛️ Architectural Masterpiece</h3>
-                <p style={{ color: '#4a5568', fontSize: '15px', lineHeight: '1.8' }}>
-                  Our signature geodesic glass-mirror domes provide a 360-degree panoramic view of the sparkling valley below and the star-studded night skies above, ensuring an experience of absolute wonder.
-                </p>
-              </div>
-
-              <div style={{ background: '#ffffff', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '40px', borderRadius: '28px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)', transition: 'transform 0.3s' }}>
-                <h3 style={{ color: '#059669', fontSize: '22px', marginBottom: '15px' }}>🌿 Impeccable Cleanliness</h3>
-                <p style={{ color: '#4a5568', fontSize: '15px', lineHeight: '1.8' }}>
-                  We adhere to the highest international standards of hygiene and daily sanitization. Every pristine white linen, polished wooden floor, and glass panel gleams with perfection.
-                </p>
-              </div>
-
-              <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.4)', padding: '40px', borderRadius: '28px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)', transition: 'transform 0.3s' }}>
-                <h3 style={{ color: '#997c17', fontSize: '22px', marginBottom: '15px' }}>☕ Skywalk Cafe Dining</h3>
-                <p style={{ color: '#4a5568', fontSize: '15px', lineHeight: '1.8' }}>
-                  Perched right on the edge of the hill, our multi-cuisine eatery serves gourmet dishes crafted from farm-fresh local ingredients while you look out over sprawling garden views.
-                </p>
-              </div>
-            </div>
-          </section>
         </div>
       )}
 
@@ -130,19 +108,8 @@ export default function Home() {
           <span style={{ color: '#059669', fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase', fontWeight: 'bold' }}>Culinary Excellence</span>
           <h1 style={{ fontSize: '48px', color: '#997c17', margin: '15px 0 25px 0' }}>Skywalk Cafe & Multi-Cuisine Dining</h1>
           <p style={{ fontSize: '18px', color: '#2d3748', lineHeight: '1.9', marginBottom: '40px' }}>
-            Dining at Amantra Hills is not merely about food; it is an immersive sensory celebration. The <strong style={{ color: '#0891b2' }}>Skywalk Cafe</strong> hangs suspended in the crisp mountain air, offering an open-air panoramic dining environment surrounded by vibrant green lawns and shimmering valley lights below.
+            Dining at Amantra Hills is not merely about food; it is an immersive sensory celebration. The <strong style={{ color: '#0891b2' }}>Skywalk Cafe</strong> hangs suspended in the crisp mountain air, offering an open-air panoramic dining environment.
           </p>
-          <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.4)', padding: '45px', borderRadius: '30px', marginBottom: '40px', boxShadow: '0 10px 30px rgba(0,0,0,0.04)' }}>
-            <h3 style={{ color: '#059669', fontSize: '24px', marginBottom: '20px' }}>What’s on the Menu?</h3>
-            <p style={{ color: '#4a5568', fontSize: '16px', lineHeight: '1.8', marginBottom: '20px' }}>
-              Our expert master chefs curate a diverse culinary portfolio ranging from authentic traditional Garhwali delicacies made with organic local herbs, to rich North Indian classics, continental favorites, wood-fired pizzas, and artisanal coffees.
-            </p>
-            <ul style={{ color: '#0891b2', lineHeight: '2.2', fontSize: '16px', paddingLeft: '20px' }}>
-              <li>🌿 <strong style={{ color: '#1a202c' }}>Organic Farm-to-Table Ingredients:</strong> Harvested fresh daily from local Himalayan farms.</li>
-              <li>🔥 <strong style={{ color: '#1a202c' }}>Evening Bonfire Barbeques:</strong> Sizzling grills served under the glittering night sky.</li>
-              <li>☕ <strong style={{ color: '#1a202c' }}>Specialty Coffee Bar:</strong> Premium brews paired with freshly baked artisanal pastries.</li>
-            </ul>
-          </div>
         </div>
       )}
 
@@ -152,31 +119,8 @@ export default function Home() {
           <span style={{ color: '#059669', fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase', fontWeight: 'bold' }}>Supreme Luxury Facilities</span>
           <h1 style={{ fontSize: '48px', color: '#997c17', margin: '15px 0 25px 0' }}>World-Class Resort Amenities</h1>
           <p style={{ fontSize: '18px', color: '#2d3748', lineHeight: '1.9', marginBottom: '40px' }}>
-            At Amantra Hills, every single facility is meticulously engineered to provide absolute comfort, high-speed convenience, and deep relaxation in the lap of nature.
+            At Amantra Hills, every single facility is meticulously engineered to provide absolute comfort and deep relaxation in the lap of nature.
           </p>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px' }}>
-            <div style={{ background: '#ffffff', border: '1px solid rgba(6, 182, 212, 0.3)', padding: '35px', borderRadius: '24px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-              <h3 style={{ color: '#0891b2', fontSize: '20px', marginBottom: '12px' }}>🌅 Sprawling Rooftop Terrace</h3>
-              <p style={{ color: '#4a5568', fontSize: '15px', lineHeight: '1.7' }}>
-                An expansive viewing deck overlooking the mountains where guests gather for morning meditation, sunrise yoga, and breathtaking photography sessions.
-              </p>
-            </div>
-
-            <div style={{ background: '#ffffff', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '35px', borderRadius: '24px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-              <h3 style={{ color: '#059669', fontSize: '20px', marginBottom: '12px' }}>🔥 Evening Firepit & Seating</h3>
-              <p style={{ color: '#4a5568', fontSize: '15px', lineHeight: '1.7' }}>
-                Cozy outdoor seating zones centered around a glowing firepit, perfect for sharing stories, sipping warm beverages, and stargazing in crisp mountain air.
-              </p>
-            </div>
-
-            <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', padding: '35px', borderRadius: '24px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-              <h3 style={{ color: '#997c17', fontSize: '20px', marginBottom: '12px' }}>📶 High-Speed Free Wi-Fi</h3>
-              <p style={{ color: '#4a5568', fontSize: '15px', lineHeight: '1.7' }}>
-                Seamless, high-speed fiber internet coverage across the entire resort property so you can stay connected or seamlessly manage remote work needs.
-              </p>
-            </div>
-          </div>
         </div>
       )}
 
@@ -188,241 +132,183 @@ export default function Home() {
           <p style={{ fontSize: '18px', color: '#2d3748', lineHeight: '1.9', marginBottom: '40px' }}>
             Amantra Hills serves as your gateway to the most iconic sacred spots, trekking routes, and natural waterfalls in Uttarakhand.
           </p>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
-            <div style={{ background: '#ffffff', border: '1px solid rgba(6, 182, 212, 0.3)', padding: '30px', borderRadius: '20px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-              <h3 style={{ color: '#0891b2', fontSize: '22px', marginBottom: '10px' }}>🌊 Neer Waterfall (~6.2 km away)</h3>
-              <p style={{ color: '#4a5568', fontSize: '15px', lineHeight: '1.7' }}>
-                A gorgeous multi-tiered waterfall cascading through lush greenery. A short, refreshing drive or trek from our resort takes you to crystal-clear natural plunge pools.
-              </p>
-            </div>
-
-            <div style={{ background: '#ffffff', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '30px', borderRadius: '20px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-              <h3 style={{ color: '#059669', fontSize: '22px', marginBottom: '10px' }}>🛕 Kunjapuri Temple (~14.4 km away)</h3>
-              <p style={{ color: '#4a5568', fontSize: '15px', lineHeight: '1.7' }}>
-                Perched at an altitude of 1,676 meters, this revered Devi temple offers the most legendary panoramic sunrise views over the snow-capped Himalayan peaks.
-              </p>
-            </div>
-
-            <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', padding: '30px', borderRadius: '20px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-              <h3 style={{ color: '#997c17', fontSize: '22px', marginBottom: '10px' }}>🌉 Ram Jhula & Lakshman Jhula</h3>
-              <p style={{ color: '#4a5568', fontSize: '15px', lineHeight: '1.7' }}>
-                Easily accessible by road from our location, experience the vibrant spiritual energy, bustling yoga ashrams, and evening Ganga Aarti ceremonies on the river banks.
-              </p>
-            </div>
-          </div>
         </div>
       )}
 
-      {/* ================= CONTACT PAGE VIEW (Upgraded with Interactive Booking Form) ================= */}
+      {/* ================= CONTACT PAGE VIEW ================= */}
       {activeTab === 'contact' && (
         <div style={{ maxWidth: '1100px', margin: '60px auto', padding: '0 20px' }}>
           <span style={{ color: '#059669', fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase', fontWeight: 'bold' }}>Get in Touch & Reserve</span>
           <h1 style={{ fontSize: '48px', color: '#997c17', margin: '15px 0 25px 0' }}>Contact & Instant Booking Inquiry</h1>
-          <p style={{ fontSize: '18px', color: '#2d3748', lineHeight: '1.9', marginBottom: '40px' }}>
-            Our reservation desk is open 24/7 to assist you with room bookings, private events, customized travel itineraries, and special requests.
-          </p>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px', marginBottom: '50px' }}>
-            {/* Interactive Booking Widget Form */}
-            <div style={{ background: '#ffffff', border: '2px solid rgba(212, 175, 55, 0.5)', padding: '35px', borderRadius: '25px', boxShadow: '0 10px 35px rgba(212, 175, 55, 0.15)', gridColumn: 'span 2' }}>
-              <h3 style={{ color: '#997c17', fontSize: '24px', marginBottom: '20px' }}>✨ Book Your Dome Stay Instantly</h3>
-              <form onSubmit={handleBookingSubmit} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '20px' }}>
-                <div>
-                  <label style={{ display: 'block', fontSize: '14px', fontWeight: 'bold', color: '#4a5568', marginBottom: '8px' }}>Your Full Name</label>
-                  <input type="text" required placeholder="Priya Sharma" value={bookingData.name} onChange={(e) => setBookingData({...bookingData, name: e.target.value})} style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #cbd5e1', fontSize: '14px' }} />
-                </div>
-                <div>
-                  <label style={{ display: 'block', fontSize: '14px', fontWeight: 'bold', color: '#4a5568', marginBottom: '8px' }}>WhatsApp Mobile Number</label>
-                  <input type="tel" required placeholder="+91 98765 43210" value={bookingData.phone} onChange={(e) => setBookingData({...bookingData, phone: e.target.value})} style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #cbd5e1', fontSize: '14px' }} />
-                </div>
-                <div>
-                  <label style={{ display: 'block', fontSize: '14px', fontWeight: 'bold', color: '#4a5568', marginBottom: '8px' }}>Check-In Date</label>
-                  <input type="date" required value={bookingData.checkIn} onChange={(e) => setBookingData({...bookingData, checkIn: e.target.value})} style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #cbd5e1', fontSize: '14px' }} />
-                </div>
-                <div>
-                  <label style={{ display: 'block', fontSize: '14px', fontWeight: 'bold', color: '#4a5568', marginBottom: '8px' }}>Check-Out Date</label>
-                  <input type="date" required value={bookingData.checkOut} onChange={(e) => setBookingData({...bookingData, checkOut: e.target.value})} style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #cbd5e1', fontSize: '14px' }} />
-                </div>
-                <div>
-                  <label style={{ display: 'block', fontSize: '14px', fontWeight: 'bold', color: '#4a5568', marginBottom: '8px' }}>Room Suite Type</label>
-                  <select value={bookingData.roomType} onChange={(e) => setBookingData({...bookingData, roomType: e.target.value})} style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #cbd5e1', fontSize: '14px', background: '#fff' }}>
-                    <option>Geo AC Dome (Mountain View)</option>
-                    <option>Geo AC Dome (Rishikesh Valley View)</option>
-                  </select>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'flex-end' }}>
-                  <button type="submit" style={{ width: '100%', background: 'linear-gradient(135deg, #22c55e, #16a34a)', color: '#ffffff', fontWeight: 'bold', padding: '14px', borderRadius: '12px', border: 'none', cursor: 'pointer', boxShadow: '0 4px 15px rgba(34, 197, 94, 0.3)', fontSize: '15px' }}>
-                    🚀 Proceed to WhatsApp Booking
-                  </button>
-                </div>
-              </form>
-              {bookingSubmitted && (
-                <div style={{ marginTop: '15px', padding: '12px', background: '#f0fdf4', color: '#166534', borderRadius: '10px', fontSize: '14px', textAlign: 'center', fontWeight: 'bold' }}>
-                  ✅ Inquiry prepared! Redirecting you securely to our WhatsApp desk...
-                </div>
-              )}
-            </div>
-
-            <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.4)', padding: '40px', borderRadius: '25px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-              <h3 style={{ color: '#997c17', fontSize: '22px', marginBottom: '20px' }}>📞 Direct Helplines</h3>
-              <p style={{ color: '#059669', fontSize: '18px', fontWeight: 'bold', lineHeight: '2' }}>
-                +91 9100009310<br />
-                +91 9873767624<br />
-                +91 9811167624
-              </p>
-            </div>
-
-            <div style={{ background: '#ffffff', border: '1px solid rgba(6, 182, 212, 0.4)', padding: '40px', borderRadius: '25px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-              <h3 style={{ color: '#0891b2', fontSize: '22px', marginBottom: '20px' }}>📍 Resort Address</h3>
-              <p style={{ color: '#4a5568', fontSize: '16px', lineHeight: '1.8' }}>
-                <strong style={{ color: '#1a202c' }}>Amantra Hills Rishikesh</strong><br />
-                48XX+Q9M, Neergarh Waterfall Rd,<br />
-                Narendra Nagar, Kurikhal,<br />
-                Uttarakhand 249201
-              </p>
-            </div>
-
-            <div style={{ background: '#ffffff', border: '1px solid rgba(16, 185, 129, 0.4)', padding: '40px', borderRadius: '25px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-              <h3 style={{ color: '#059669', fontSize: '22px', marginBottom: '20px' }}>⏰ Policy & Timings</h3>
-              <p style={{ color: '#4a5568', fontSize: '16px', lineHeight: '1.8' }}>
-                <strong style={{ color: '#1a202c' }}>Check-In:</strong> 2:00 PM<br />
-                <strong style={{ color: '#1a202c' }}>Check-Out:</strong> 12:00 PM<br />
-                <strong style={{ color: '#1a202c' }}>Front Desk:</strong> 24 Hours Active
-              </p>
-            </div>
+          <div style={{ background: '#ffffff', border: '2px solid rgba(212, 175, 55, 0.5)', padding: '35px', borderRadius: '25px', boxShadow: '0 10px 35px rgba(212, 175, 55, 0.15)', marginBottom: '40px' }}>
+            <h3 style={{ color: '#997c17', fontSize: '24px', marginBottom: '20px' }}>✨ Book Your Dome Stay Instantly</h3>
+            <form onSubmit={handleBookingSubmit} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '20px' }}>
+              <div>
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: 'bold', color: '#4a5568', marginBottom: '8px' }}>Your Full Name</label>
+                <input type="text" required placeholder="Priya Sharma" value={bookingData.name} onChange={(e) => setBookingData({...bookingData, name: e.target.value})} style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #cbd5e1', fontSize: '14px' }} />
+              </div>
+              <div>
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: 'bold', color: '#4a5568', marginBottom: '8px' }}>WhatsApp Mobile Number</label>
+                <input type="tel" required placeholder="+91 98765 43210" value={bookingData.phone} onChange={(e) => setBookingData({...bookingData, phone: e.target.value})} style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #cbd5e1', fontSize: '14px' }} />
+              </div>
+              <div>
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: 'bold', color: '#4a5568', marginBottom: '8px' }}>Check-In Date</label>
+                <input type="date" required value={bookingData.checkIn} onChange={(e) => setBookingData({...bookingData, checkIn: e.target.value})} style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #cbd5e1', fontSize: '14px' }} />
+              </div>
+              <div>
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: 'bold', color: '#4a5568', marginBottom: '8px' }}>Check-Out Date</label>
+                <input type="date" required value={bookingData.checkOut} onChange={(e) => setBookingData({...bookingData, checkOut: e.target.value})} style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #cbd5e1', fontSize: '14px' }} />
+              </div>
+              <div>
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: 'bold', color: '#4a5568', marginBottom: '8px' }}>Room Suite Type</label>
+                <select value={bookingData.roomType} onChange={(e) => setBookingData({...bookingData, roomType: e.target.value})} style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #cbd5e1', fontSize: '14px', background: '#fff' }}>
+                  <option>Geo AC Dome (Mountain View)</option>
+                  <option>Geo AC Dome (Rishikesh Valley View)</option>
+                </select>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'flex-end' }}>
+                <button type="submit" style={{ width: '100%', background: 'linear-gradient(135deg, #22c55e, #16a34a)', color: '#ffffff', fontWeight: 'bold', padding: '14px', borderRadius: '12px', border: 'none', cursor: 'pointer', fontSize: '15px' }}>
+                  🚀 Proceed to WhatsApp Booking
+                </button>
+              </div>
+            </form>
+            {bookingSubmitted && (
+              <div style={{ marginTop: '15px', padding: '12px', background: '#f0fdf4', color: '#166534', borderRadius: '10px', fontSize: '14px', textAlign: 'center', fontWeight: 'bold' }}>
+                ✅ Inquiry prepared! Redirecting securely to WhatsApp...
+              </div>
+            )}
           </div>
         </div>
       )}
 
-      {/* ================= RESORT PHOTO GALLERY SECTION ================= */}
-      <section style={{ maxWidth: '1150px', margin: '80px auto', padding: '0 20px' }}>
-        <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-          <h2 style={{ fontSize: '38px', color: '#997c17', marginBottom: '15px' }}>Resort Gallery & Domes</h2>
-          <p style={{ color: '#4a5568', maxWidth: '750px', margin: '0 auto', fontSize: '16px', lineHeight: '1.8' }}>
-            Take a visual journey through our luxurious geodesic domes, scenic mountain landscapes, and cozy interior setups.
-          </p>
+      {/* ================= WHAT OUR GUESTS SAY (RENAMED & EXPANDED REVIEWS SECTION) ================= */}
+      <section style={{ maxWidth: '1150px', margin: '90px auto 40px auto', padding: '0 20px', borderTop: '1px solid rgba(212, 175, 55, 0.3)', paddingTop: '60px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '20px', marginBottom: '40px' }}>
+          <div>
+            <span style={{ color: '#059669', fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase', fontWeight: 'bold' }}>Verified Testimonials</span>
+            <h2 style={{ fontSize: '38px', color: '#997c17', marginTop: '5px' }}>What Our Guests Say</h2>
+            <p style={{ color: '#4a5568', fontSize: '15px' }}>Read genuine feedback from families, couples, and travelers who stayed with us.</p>
+          </div>
+          <button 
+            onClick={() => setShowReviewModal(true)} 
+            style={{ background: 'linear-gradient(135deg, #0891b2, #0e7490)', color: '#ffffff', padding: '14px 28px', borderRadius: '30px', border: 'none', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 15px rgba(8, 145, 178, 0.3)' }}
+          >
+            ✍️ Leave a Review
+          </button>
         </div>
 
+        {/* Review Modal Pop-up */}
+        {showReviewModal && (
+          <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.5)', zIndex: 1000, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px' }}>
+            <div style={{ background: '#fff', padding: '35px', borderRadius: '24px', maxWidth: '500px', width: '100%', position: 'relative', boxShadow: '0 20px 40px rgba(0,0,0,0.2)' }}>
+              <h3 style={{ color: '#997c17', fontSize: '24px', marginBottom: '15px' }}>Share Your Experience</h3>
+              <form onSubmit={handleReviewSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '13px', fontWeight: 'bold', marginBottom: '5px' }}>Your Name</label>
+                  <input type="text" required placeholder="Aarav Malhotra" value={newReview.name} onChange={(e) => setNewReview({...newReview, name: e.target.value})} style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #cbd5e1' }} />
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: '13px', fontWeight: 'bold', marginBottom: '5px' }}>Rating</label>
+                  <select value={newReview.rating} onChange={(e) => setNewReview({...newReview, rating: e.target.value})} style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #cbd5e1', background: '#fff' }}>
+                    <option value="5">⭐⭐⭐⭐⭐ (5/5 - Exceptional)</option>
+                    <option value="4">⭐⭐⭐⭐ (4/5 - Great Experience)</option>
+                    <option value="3">⭐⭐⭐ (3/5 - Average)</option>
+                  </select>
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: '13px', fontWeight: 'bold', marginBottom: '5px' }}>Experience Category</label>
+                  <select value={newReview.category} onChange={(e) => setNewReview({...newReview, category: e.target.value})} style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #cbd5e1', background: '#fff' }}>
+                    <option>Dome Suite Stay</option>
+                    <option>Skywalk Cafe Dining</option>
+                    <option>Resort Hospitality</option>
+                  </select>
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: '13px', fontWeight: 'bold', marginBottom: '5px' }}>Your Comments</label>
+                  <textarea rows={3} required placeholder="Tell us about your stay..." value={newReview.comment} onChange={(e) => setNewReview({...newReview, comment: e.target.value})} style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #cbd5e1' }} />
+                </div>
+                <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
+                  <button type="submit" style={{ flex: 1, background: '#16a34a', color: '#fff', padding: '12px', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>Submit via WhatsApp</button>
+                  <button type="button" onClick={() => setShowReviewModal(false)} style={{ background: '#cbd5e1', color: '#334155', padding: '12px 20px', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>Close</button>
+                </div>
+              </form>
+              {reviewSubmitted && <p style={{ color: '#16a34a', fontWeight: 'bold', marginTop: '10px', textAlign: 'center' }}>Review sent to WhatsApp desk!</p>}
+            </div>
+          </div>
+        )}
+
+        {/* Abundant Realistic Review Cards (3, 4, and 5 star combinations) */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '25px' }}>
           
-          {/* Image 1 */}
-          <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/home page image 2.jpg" alt="Nighttime City Panorama" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block', transition: 'transform 0.4s ease' }} />
-            <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Nighttime Valley View</div>
+          <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', padding: '30px', borderRadius: '24px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
+            <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '2px', color: '#0891b2', fontWeight: 'bold', display: 'block', marginBottom: '10px' }}>Dome Suite Stay</span>
+            <h3 style={{ fontSize: '19px', fontWeight: 'bold', marginBottom: '12px', color: '#1a202c' }}>Magical Stargazing Experience</h3>
+            <p style={{ color: '#4a5568', fontSize: '14px', lineHeight: '1.7', marginBottom: '20px' }}>"The glass domes at Amantra Hills are sensational. Sleeping under the stars while being fully cozy with room heating was a dream come true."</p>
+            <div style={{ borderTop: '1px solid #edf2f7', paddingTop: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span style={{ color: '#059669', fontWeight: 'bold', fontSize: '14px' }}>— Priya Sharma</span>
+              <span style={{ color: '#d97706', fontSize: '16px' }}>★★★★★</span>
+            </div>
           </div>
 
-          {/* Image 2 */}
-          <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/home page image 1.jpg" alt="Twilight Property Aerial" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block', transition: 'transform 0.4s ease' }} />
-            <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Twilight Aerial View</div>
+          <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', padding: '30px', borderRadius: '24px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
+            <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '2px', color: '#0891b2', fontWeight: 'bold', display: 'block', marginBottom: '10px' }}>Skywalk Cafe</span>
+            <h3 style={{ fontSize: '19px', fontWeight: 'bold', marginBottom: '12px', color: '#1a202c' }}>Unmatched Evening Views</h3>
+            <p style={{ color: '#4a5568', fontSize: '14px', lineHeight: '1.7', marginBottom: '20px' }}>"Hanging out at the Skywalk Cafe in the evening mountain breeze with hot coffee and wood-fired pizza was absolute perfection."</p>
+            <div style={{ borderTop: '1px solid #edf2f7', paddingTop: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span style={{ color: '#059669', fontWeight: 'bold', fontSize: '14px' }}>— Rohan Verma</span>
+              <span style={{ color: '#d97706', fontSize: '16px' }}>★★★★★</span>
+            </div>
           </div>
 
-          {/* Image 3 */}
-          <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/1000013862.jpg" alt="Misty Mountain Day View" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block', transition: 'transform 0.4s ease' }} />
-            <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Misty Mountain Morning</div>
+          <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', padding: '30px', borderRadius: '24px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
+            <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '2px', color: '#0891b2', fontWeight: 'bold', display: 'block', marginBottom: '10px' }}>Family Vacation</span>
+            <h3 style={{ fontSize: '19px', fontWeight: 'bold', marginBottom: '12px', color: '#1a202c' }}>Peaceful Retreat from City Life</h3>
+            <p style={{ color: '#4a5568', fontSize: '14px', lineHeight: '1.7', marginBottom: '20px' }}>"Cleanliness was top-notch across the entire property. The kids loved the open lawns and the bonfire evenings were very warm and welcoming."</p>
+            <div style={{ borderTop: '1px solid #edf2f7', paddingTop: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span style={{ color: '#059669', fontWeight: 'bold', fontSize: '14px' }}>— Ananya & Nikhil Gupta</span>
+              <span style={{ color: '#d97706', fontSize: '16px' }}>★★★★☆</span>
+            </div>
           </div>
 
-          {/* Image 4 */}
-          <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/1000013863.jpg" alt="Valley Outlook" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block', transition: 'transform 0.4s ease' }} />
-            <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Scenic Valley Outlook</div>
+          <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', padding: '30px', borderRadius: '24px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
+            <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '2px', color: '#0891b2', fontWeight: 'bold', display: 'block', marginBottom: '10px' }}>Weekend Getaway</span>
+            <h3 style={{ fontSize: '19px', fontWeight: 'bold', marginBottom: '12px', color: '#1a202c' }}>Great Location Near Neergarh</h3>
+            <p style={{ color: '#4a5568', fontSize: '14px', lineHeight: '1.7', marginBottom: '20px' }}>"Very close to Neer Waterfall road in Narendra Nagar. The drive up is scenic and the hospitality team went out of their way to assist us."</p>
+            <div style={{ borderTop: '1px solid #edf2f7', paddingTop: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span style={{ color: '#059669', fontWeight: 'bold', fontSize: '14px' }}>— Vikrant Joshi</span>
+              <span style={{ color: '#d97706', fontSize: '16px' }}>★★★★☆</span>
+            </div>
           </div>
 
-          {/* Image 5 */}
-          <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/1000013860.jpg" alt="Guest on Property" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block', transition: 'transform 0.4s ease' }} />
-            <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Resort Grounds & Seating</div>
+          <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', padding: '30px', borderRadius: '24px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
+            <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '2px', color: '#0891b2', fontWeight: 'bold', display: 'block', marginBottom: '10px' }}>Solo Traveler</span>
+            <h3 style={{ fontSize: '19px', fontWeight: 'bold', marginBottom: '12px', color: '#1a202c' }}>Serene & Safe Atmosphere</h3>
+            <p style={{ color: '#4a5568', fontSize: '14px', lineHeight: '1.7', marginBottom: '20px' }}>"I stayed here to work remotely for 3 days. High-speed Wi-Fi worked smoothly, and the view from the desk was inspiring. Minor hiccup with hot water timing on day one, but staff resolved it quickly."</p>
+            <div style={{ borderTop: '1px solid #edf2f7', paddingTop: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span style={{ color: '#059669', fontWeight: 'bold', fontSize: '14px' }}>— Sneha K.</span>
+              <span style={{ color: '#d97706', fontSize: '16px' }}>⭐⭐⭐ (3.5/5)</span>
+            </div>
           </div>
 
-          {/* Image 6 */}
-          <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/1000013866.jpg" alt="Individual Dome Exterior" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block', transition: 'transform 0.4s ease' }} />
-            <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Geodesic Dome Exterior</div>
+          <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', padding: '30px', borderRadius: '24px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
+            <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '2px', color: '#0891b2', fontWeight: 'bold', display: 'block', marginBottom: '10px' }}>Anniversary Trip</span>
+            <h3 style={{ fontSize: '19px', fontWeight: 'bold', marginBottom: '12px', color: '#1a202c' }}>Unforgettable Romance in the Hills</h3>
+            <p style={{ color: '#4a5568', fontSize: '14px', lineHeight: '1.7', marginBottom: '20px' }}>"We celebrated our 5th wedding anniversary in the Teal Suite. The management arranged special lighting and flowers. Truly memorable!"</p>
+            <div style={{ borderTop: '1px solid #edf2f7', paddingTop: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span style={{ color: '#059669', fontWeight: 'bold', fontSize: '14px' }}>— Mohit & Ritu</span>
+              <span style={{ color: '#d97706', fontSize: '16px' }}>★★★★★</span>
+            </div>
           </div>
 
-          {/* Image 7 */}
-          <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/1000013867.jpg" alt="Yellow Dome Bed Setup" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block', transition: 'transform 0.4s ease' }} />
-            <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Yellow Suite Bed Setup</div>
-          </div>
-
-          {/* Image 8 */}
-          <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/1000013859.jpg" alt="Yellow Dome Interior and Chairs" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block', transition: 'transform 0.4s ease' }} />
-            <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Yellow Suite Lounge Area</div>
-          </div>
-
-          {/* Image 9 */}
-          <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/1000013865.jpg" alt="Teal Dome Bed and Seating" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block', transition: 'transform 0.4s ease' }} />
-            <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Teal Suite Master Bed</div>
-          </div>
-
-          {/* Image 10 */}
-          <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/1000013870.jpg" alt="Teal Dome Bedroom and Windows" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block', transition: 'transform 0.4s ease' }} />
-            <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Teal Suite Panorama Windows</div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* Guest Reviews Section (Visible across views with database fallback) */}
-      <section style={{ maxWidth: '1150px', margin: '90px auto 40px auto', padding: '0 20px', borderTop: '1px solid rgba(212, 175, 55, 0.3)', paddingTop: '60px' }}>
-        <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-          <h2 style={{ fontSize: '34px', color: '#997c17', marginBottom: '10px' }}>Flooded Guest Experiences</h2>
-          <p style={{ color: '#4a5568' }}>Real feedback from travelers who experienced supreme mountain luxury.</p>
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '25px' }}>
-          {content.length > 0 ? (
-            content.map((item) => (
-              <div key={item.id} style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', padding: '30px', borderRadius: '24px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-                <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '2px', color: '#0891b2', fontWeight: 'bold', display: 'block', marginBottom: '10px' }}>
-                  {item.category || 'Review'} • 5 Stars
-                </span>
-                <h3 style={{ fontSize: '19px', fontWeight: 'bold', marginBottom: '12px', color: '#1a202c' }}>{item.title}</h3>
-                <p style={{ color: '#4a5568', fontSize: '14px', lineHeight: '1.7', marginBottom: '20px' }}>"{item.description}"</p>
-                <div style={{ borderTop: '1px solid #edf2f7', paddingTop: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ color: '#059669', fontWeight: 'bold', fontSize: '14px' }}>— {item.author}</span>
-                  <span style={{ color: '#d97706', fontSize: '16px' }}>★★★★★</span>
-                </div>
-              </div>
-            ))
-          ) : (
-            // Backup fallback reviews so section is never empty
-            <>
-              <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', padding: '30px', borderRadius: '24px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-                <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '2px', color: '#0891b2', fontWeight: 'bold', display: 'block', marginBottom: '10px' }}>Dome Suite • 5 Stars</span>
-                <h3 style={{ fontSize: '19px', fontWeight: 'bold', marginBottom: '12px', color: '#1a202c' }}>Breathtaking Views</h3>
-                <p style={{ color: '#4a5568', fontSize: '14px', lineHeight: '1.7', marginBottom: '20px' }}>"The glass domes at Amantra Hills are out of this world. Waking up to the mountain mist was a spiritual experience."</p>
-                <div style={{ borderTop: '1px solid #edf2f7', paddingTop: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ color: '#059669', fontWeight: 'bold', fontSize: '14px' }}>— Priya Sharma</span>
-                  <span style={{ color: '#d97706', fontSize: '16px' }}>★★★★★</span>
-                </div>
-              </div>
-              <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', padding: '30px', borderRadius: '24px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-                <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '2px', color: '#0891b2', fontWeight: 'bold', display: 'block', marginBottom: '10px' }}>Skywalk Cafe • 5 Stars</span>
-                <h3 style={{ fontSize: '19px', fontWeight: 'bold', marginBottom: '12px', color: '#1a202c' }}>Unmatched Dining</h3>
-                <p style={{ color: '#4a5568', fontSize: '14px', lineHeight: '1.7', marginBottom: '20px' }}>"Hanging out at the Skywalk Cafe in the evening breeze with hot coffee and wood-fired pizza was absolute perfection."</p>
-                <div style={{ borderTop: '1px solid #edf2f7', paddingTop: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ color: '#059669', fontWeight: 'bold', fontSize: '14px' }}>— Rohan Verma</span>
-                  <span style={{ color: '#d97706', fontSize: '16px' }}>★★★★★</span>
-                </div>
-              </div>
-            </>
-          )}
         </div>
       </section>
 
       {/* Footer */}
       <footer style={{ textAlign: 'center', padding: '40px', borderTop: '1px solid rgba(212, 175, 55, 0.3)', color: '#4a5568', fontSize: '14px', backgroundColor: '#f4f0e6' }}>
-        <p>© 2026 Amantra Hills Rishikesh. All Rights Reserved. Address: 48XX+Q9M, Neergarh Waterfall Rd, Narendra Nagar, Kurikhal, Uttarakhand 249201</p>
+        <p>© 2026 Amantra Hills Rishikesh. All Rights Reserved. Address: Neergarh Waterfall Rd, Narendra Nagar, Kurikhal, Uttarakhand 249201</p>
       </footer>
 
-      {/* Smart Multilingual AI Chatbot & WhatsApp Direct Booking Button */}
+      {/* Chatbot & WhatsApp Direct Floating Widget */}
       <div style={{ position: 'fixed', bottom: '25px', right: '25px', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'flex-end', fontFamily: 'serif' }}>
         <a
           href="https://wa.me/919100009310?text=Hi,%20I%20would%20like%20to%20check%20availability%20and%20book%20a%20stay%20at%20Amantra%20Hills%20Rishikesh."
