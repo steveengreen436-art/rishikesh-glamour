@@ -15,64 +15,137 @@ export default function Home() {
   }, []);
 
   return (
-    <main style={{ backgroundColor: '#020205', color: '#ffffff', minHeight: '100vh', fontFamily: 'sans-serif', padding: '0 20px 80px 20px' }}>
+    <main style={{ backgroundColor: '#020b0e', color: '#ffffff', minHeight: '100vh', fontFamily: 'serif', overflowX: 'hidden' }}>
       
-      {/* Hero Section */}
-      <div style={{ textAlign: 'center', padding: '80px 20px', maxWidth: '900px', margin: '0 auto' }}>
-        <span style={{ color: '#22d3ee', fontSize: '14px', letterSpacing: '4px', textTransform: 'uppercase', fontWeight: 'bold' }}>
-          Rishikesh, Uttarakhand • The Spiritual Luxury Sanctuary
-        </span>
-        <h1 style={{ fontSize: 'clamp(40px, 8vw, 75px)', fontWeight: '900', margin: '20px 0', background: 'linear-gradient(to right, #22d3ee, #ffffff, #c084fc)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-          Rishikesh Majesty
-        </h1>
-        <p style={{ fontSize: '20px', color: '#9ca3af', fontStyle: 'italic', lineHeight: '1.6', marginBottom: '40px' }}>
-          Where supreme modern luxury meets the timeless flow of the holy Ganges. Impeccable cleanliness, personalized service, and absolute perfection.
-        </p>
-        <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <button style={{ backgroundColor: '#22d3ee', color: '#000000', fontWeight: 'bold', padding: '16px 36px', borderRadius: '50px', border: 'none', cursor: 'pointer', boxShadow: '0 0 25px rgba(34,211,238,0.5)', fontSize: '16px' }}>
-            Explore Luxury Suites
-          </button>
-          <button style={{ backgroundColor: 'transparent', color: '#22d3ee', border: '2px solid rgba(34,211,238,0.5)', padding: '16px 36px', borderRadius: '50px', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold' }}>
-            Romantic Getaways ✨
-          </button>
-        </div>
+      {/* Top Gold & Turquoise Announcement Bar */}
+      <div style={{ background: 'linear-gradient(90deg, #d4af37, #06b6d4, #10b981)', color: '#020b0e', padding: '10px 20px', textAlign: 'center', fontSize: '13px', fontWeight: 'bold', letterSpacing: '1px' }}>
+        ✨ AMANTRA HILLS RISHIKESH • BOOKINGS OPEN: +91 9100009310 / +91 9873767624 / +91 9811167624 ✨
       </div>
 
-      {/* Highlights Bar */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px', maxWidth: '1000px', margin: '0 auto 60px auto', textAlign: 'center' }}>
-        <div style={{ background: '#0b0f19', border: '1px solid #1e293b', padding: '25px', borderRadius: '20px' }}>
-          <h3 style={{ color: '#22d3ee', fontSize: '18px', marginBottom: '8px' }}>✨ Ultra Clean & Modern</h3>
-          <p style={{ color: '#9ca3af', fontSize: '14px' }}>Immaculate daily sanitization, contemporary aesthetic, and glowing ambiance.</p>
+      {/* Navigation Bar */}
+      <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 40px', borderBottom: '1px solid rgba(212, 175, 55, 0.2)', backdropFilter: 'blur(10px)' }}>
+        <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#d4af37', letterSpacing: '2px' }}>
+          AMANTRA HILLS
         </div>
-        <div style={{ background: '#0b0f19', border: '1px solid #1e293b', padding: '25px', borderRadius: '20px' }}>
-          <h3 style={{ color: '#c084fc', fontSize: '18px', marginBottom: '8px' }}>💖 Romantic Getaway Specials</h3>
-          <p style={{ color: '#9ca3af', fontSize: '14px' }}>Candle-lit riverside dinners, rose petal decorations, and couples spa packages.</p>
+        <div style={{ display: 'flex', gap: '30px', fontSize: '14px', color: '#a5f3fc', textTransform: 'uppercase', letterSpacing: '1px' }}>
+          <span style={{ cursor: 'pointer' }}>Home</span>
+          <span style={{ cursor: 'pointer' }}>Dining (Skywalk)</span>
+          <span style={{ cursor: 'pointer' }}>Amenities</span>
+          <span style={{ cursor: 'pointer' }}>Attractions</span>
+          <span style={{ cursor: 'pointer' }}>Contact</span>
         </div>
-        <div style={{ background: '#0b0f19', border: '1px solid #1e293b', padding: '25px', borderRadius: '20px' }}>
-          <h3 style={{ color: '#34d399', fontSize: '18px', marginBottom: '8px' }}>🧘 Free Sunrise Yoga</h3>
-          <p style={{ color: '#9ca3af', fontSize: '14px' }}>Private master yoga sessions right on the banks of the holy Ganges.</p>
+      </nav>
+
+      {/* Hero Section with Glass Mirror & Your Stunning Aerial Dome Background */}
+      <header style={{ 
+        position: 'relative', 
+        padding: '120px 20px', 
+        textAlign: 'center', 
+        backgroundImage: 'linear-gradient(rgba(2, 11, 14, 0.75), rgba(2, 11, 14, 0.85)), url("https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=2000")', 
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center',
+        borderBottom: '2px solid #d4af37'
+      }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto', background: 'rgba(2, 11, 14, 0.65)', backdropFilter: 'blur(16px)', padding: '50px', borderRadius: '30px', border: '1px solid rgba(212, 175, 55, 0.4)', boxShadow: '0 0 40px rgba(6, 182, 212, 0.2)' }}>
+          <span style={{ color: '#34d399', fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase', fontWeight: 'bold', display: 'block', marginBottom: '15px' }}>
+            Narendra Nagar, Kurikhal, Uttarakhand
+          </span>
+          <h1 style={{ fontSize: 'clamp(40px, 7vw, 70px)', fontWeight: '700', color: '#d4af37', marginBottom: '20px', fontFamily: 'serif' }}>
+            Amantra Hills Rishikesh
+          </h1>
+          <p style={{ fontSize: '18px', color: '#e2e8f0', lineHeight: '1.8', marginBottom: '30px', fontStyle: 'italic' }}>
+            Perched high in the majestic hills of Narendra Nagar, Amantra Hills offers an ethereal escape where modern luxury blends seamlessly with tranquil mountain breezes. Experience pristine comfort, glowing night skies, and personalized hospitality like never before.
+          </p>
+          <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <button style={{ background: 'linear-gradient(135deg, #d4af37, #aa820a)', color: '#020b0e', fontWeight: 'bold', padding: '16px 36px', borderRadius: '50px', border: 'none', cursor: 'pointer', boxShadow: '0 0 20px rgba(212, 175, 55, 0.5)', fontSize: '15px' }}>
+              Book Your Stay Now
+            </button>
+            <button style={{ background: 'transparent', color: '#06b6d4', border: '2px solid #06b6d4', padding: '16px 36px', borderRadius: '50px', cursor: 'pointer', fontSize: '15px', fontWeight: 'bold', boxShadow: '0 0 15px rgba(6, 182, 212, 0.3)' }}>
+              Explore Skywalk Cafe ✨
+            </button>
+          </div>
         </div>
-      </div>
+      </header>
+
+      {/* Info Flood / Rich Details Section */}
+      <section style={{ maxWidth: '1100px', margin: '80px auto', padding: '0 20px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+          <h2 style={{ fontSize: '36px', color: '#d4af37', marginBottom: '15px' }}>The Amantra Hills Experience</h2>
+          <p style={{ color: '#94a3b8', maxWidth: '700px', margin: '0 auto', fontSize: '16px', lineHeight: '1.7' }}>
+            Designed for travelers seeking absolute peace, cleanliness, and state-of-the-art modern amenities. Every detail of your stay is curated to perfection.
+          </p>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
+          
+          <div style={{ background: 'rgba(6, 182, 212, 0.05)', border: '1px solid rgba(6, 182, 212, 0.3)', padding: '35px', borderRadius: '24px', backdropFilter: 'blur(10px)' }}>
+            <h3 style={{ color: '#06b6d4', fontSize: '20px', marginBottom: '15px' }}>🍽️ Skywalk Cafe & Dining</h3>
+            <p style={{ color: '#cbd5e1', fontSize: '14px', lineHeight: '1.7' }}>
+              Enjoy our on-site multi-cuisine eatery featuring panoramic garden and mountain views. Farm-to-table gourmet dining crafted fresh daily by expert chefs.
+            </p>
+          </div>
+
+          <div style={{ background: 'rgba(52, 211, 153, 0.05)', border: '1px solid rgba(52, 211, 153, 0.3)', padding: '35px', borderRadius: '24px', backdropFilter: 'blur(10px)' }}>
+            <h3 style={{ color: '#34d399', fontSize: '20px', marginBottom: '15px' }}>🔥 Premium Facilities</h3>
+            <p style={{ color: '#cbd5e1', fontSize: '14px', lineHeight: '1.7' }}>
+              Relax on our sprawling rooftop terrace, gather around the evening firepit under the stars, sip artisanal brews at the coffee shop, and stay connected with high-speed free Wi-Fi.
+            </p>
+          </div>
+
+          <div style={{ background: 'rgba(212, 175, 55, 0.05)', border: '1px solid rgba(212, 175, 55, 0.3)', padding: '35px', borderRadius: '24px', backdropFilter: 'blur(10px)' }}>
+            <h3 style={{ color: '#d4af37', fontSize: '20px', marginBottom: '15px' }}>📍 Prime Location & Access</h3>
+            <p style={{ color: '#cbd5e1', fontSize: '14px', lineHeight: '1.7' }}>
+              Located at 48XX+Q9M, Neergarh Waterfall Rd, Kurikhal. Perfectly situated near top attractions with seamless road accessibility.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      {/* Nearby Attractions & Logistics Section */}
+      <section style={{ background: '#041318', padding: '80px 20px', borderTop: '1px solid rgba(6, 182, 212, 0.2)', borderBottom: '1px solid rgba(6, 182, 212, 0.2)' }}>
+        <div style={{ maxWidth: '1000px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '40px' }}>
+          <div>
+            <h3 style={{ color: '#d4af37', fontSize: '22px', marginBottom: '20px' }}>🗺️ Nearby Attractions</h3>
+            <ul style={{ listStyle: 'none', padding: 0, color: '#cbd5e1', lineHeight: '2.2', fontSize: '15px' }}>
+              <li>🌊 <strong style={{ color: '#06b6d4' }}>Neer Waterfall:</strong> ~6.2 km away</li>
+              <li>🛕 <strong style={{ color: '#34d399' }}>Kunjapuri Temple:</strong> ~14.4 km away</li>
+              <li>🌉 <strong style={{ color: '#d4af37' }}>Ram & Lakshman Jhula:</strong> Easily accessible by road</li>
+            </ul>
+          </div>
+          <div>
+            <h3 style={{ color: '#d4af37', fontSize: '22px', marginBottom: '20px' }}>⏰ Check-In / Check-Out Policy</h3>
+            <p style={{ color: '#cbd5e1', lineHeight: '1.8', fontSize: '15px', marginBottom: '15px' }}>
+              <strong style={{ color: '#ffffff' }}>Standard Check-In:</strong> 2:00 PM<br />
+              <strong style={{ color: '#ffffff' }}>Standard Check-Out:</strong> 12:00 PM
+            </p>
+            <h3 style={{ color: '#d4af37', fontSize: '22px', margin: '20px 0 10px 0' }}>📞 Direct Reservation Helplines</h3>
+            <p style={{ color: '#34d399', fontSize: '16px', fontWeight: 'bold' }}>
+              +91 9100009310 / +91 9873767624 / +91 9811167624
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* Testimonials & Data Stream */}
-      <section style={{ maxWidth: '1100px', margin: '0 auto' }}>
-        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <h2 style={{ fontSize: '32px', fontWeight: 'bold', marginBottom: '10px' }}>Flooded Reviews & Luxury Testimonials</h2>
-          <p style={{ color: '#9ca3af' }}>Real feedback from guests who experienced supreme comfort and personalized hospitality.</p>
+      <section style={{ maxWidth: '1100px', margin: '80px auto', padding: '0 20px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+          <h2 style={{ fontSize: '34px', color: '#d4af37', marginBottom: '10px' }}>Guest Reviews & Stories</h2>
+          <p style={{ color: '#94a3b8' }}>Real experiences from guests who found peace and luxury at Amantra Hills.</p>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '25px' }}>
           {content.map((item) => (
-            <div key={item.id} style={{ background: '#090d16', border: '1px solid #1e3a8a', padding: '30px', borderRadius: '24px', boxShadow: '0 0 20px rgba(34,211,238,0.07)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <div key={item.id} style={{ background: 'rgba(2, 11, 14, 0.8)', border: '1px solid rgba(212, 175, 55, 0.3)', padding: '30px', borderRadius: '24px', boxShadow: '0 0 20px rgba(6, 182, 212, 0.1)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
               <div>
-                <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '2px', color: '#22d3ee', fontWeight: 'bold', display: 'block', marginBottom: '10px' }}>
-                  {item.category || 'Review'} • Rating: {item.rating}★
+                <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '2px', color: '#06b6d4', fontWeight: 'bold', display: 'block', marginBottom: '10px' }}>
+                  {item.category || 'Review'} • 5 Stars
                 </span>
-                <h3 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '12px', color: '#ffffff' }}>{item.title}</h3>
-                <p style={{ color: '#d1d5db', fontSize: '15px', lineHeight: '1.6', marginBottom: '20px' }}>"{item.description}"</p>
+                <h3 style={{ fontSize: '19px', fontWeight: 'bold', marginBottom: '12px', color: '#ffffff' }}>{item.title}</h3>
+                <p style={{ color: '#cbd5e1', fontSize: '14px', lineHeight: '1.7', marginBottom: '20px' }}>"{item.description}"</p>
               </div>
-              <div style={{ borderTop: '1px solid #1f2937', paddingTop: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ color: '#c084fc', fontWeight: 'bold', fontSize: '14px' }}>— {item.author}</span>
+              <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ color: '#34d399', fontWeight: 'bold', fontSize: '14px' }}>— {item.author}</span>
                 <span style={{ color: '#facc15', fontSize: '16px' }}>★★★★★</span>
               </div>
             </div>
@@ -80,7 +153,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Floating Smart Multilingual AI Chatbot Component */}
+      {/* Footer */}
+      <footer style={{ textAlign: 'center', padding: '40px', borderTop: '1px solid rgba(212, 175, 55, 0.2)', color: '#94a3b8', fontSize: '14px' }}>
+        <p>© 2026 Amantra Hills Rishikesh. All Rights Reserved. Address: 48XX+Q9M, Neergarh Waterfall Rd, Narendra Nagar, Kurikhal, Uttarakhand 249201</p>
+      </footer>
+
+      {/* Floating Multilingual Smart AI Chatbot */}
       <AIChatbot />
 
     </main>
