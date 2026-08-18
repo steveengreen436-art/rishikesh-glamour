@@ -131,25 +131,51 @@ export default function AIChatbot() {
                 Amantra Hills Elite Concierge
               </div>
             </div>
-            <button
-              onClick={() => setIsOpen(false)}
-              style={{
-                background: 'rgba(255,255,255,0.1)',
-                border: 'none',
-                color: '#ffffff',
-                width: '30px',
-                height: '30px',
-                borderRadius: '50%',
-                cursor: 'pointer',
-                fontSize: '14px',
-                fontWeight: 'bold',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              ✕
-            </button>
+            
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              {/* WhatsApp Direct Booking Button in Header */}
+              <a
+                href="https://wa.me/919100009310?text=Hi,%20I%20would%20like%20to%20book%20a%20stay%20via%20WhatsApp."
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Book via WhatsApp"
+                style={{
+                  background: '#22c55e',
+                  color: '#ffffff',
+                  textDecoration: 'none',
+                  fontSize: '12px',
+                  fontWeight: 'bold',
+                  padding: '6px 10px',
+                  borderRadius: '12px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                  boxShadow: '0 2px 6px rgba(34, 197, 94, 0.4)',
+                }}
+              >
+                💬 WhatsApp
+              </a>
+
+              <button
+                onClick={() => setIsOpen(false)}
+                style={{
+                  background: 'rgba(255,255,255,0.1)',
+                  border: 'none',
+                  color: '#ffffff',
+                  width: '30px',
+                  height: '30px',
+                  borderRadius: '50%',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  fontWeight: 'bold',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                ✕
+              </button>
+            </div>
           </div>
 
           {/* Messages Area */}
