@@ -77,7 +77,7 @@ export default function AIChatbot() {
             cursor: 'pointer',
             boxShadow: '0 8px 25px rgba(6, 182, 212, 0.4)',
             display: 'flex',
-            alignItem: 'center',
+            alignItems: 'center',
             gap: '10px',
             transition: 'transform 0.2s ease',
           }}
