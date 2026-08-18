@@ -23,6 +23,10 @@ export default function Home() {
   const [newReview, setNewReview] = useState({ name: '', rating: '5', comment: '', category: 'Dome Suite' });
   const [reviewSubmitted, setReviewSubmitted] = useState(false);
 
+  // Video Popup States
+  const [showVideoPopup1, setShowVideoPopup1] = useState(false);
+  const [showVideoPopup2, setShowVideoPopup2] = useState(false);
+
   useEffect(() => {
     async function fetchData() {
       const { data } = await supabase.from('hotel_content').select('*');
@@ -30,6 +34,17 @@ export default function Home() {
     }
     fetchData();
   }, []);
+
+  // Automatically trigger video popups on homepage mount (with slight staggering if desired, or both on load)
+  useEffect(() => {
+    if (activeTab === 'home') {
+      const timer = setTimeout(() => {
+        setShowVideoPopup1(true);
+        setShowVideoPopup2(true);
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [activeTab]);
 
   const handleBookingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -100,17 +115,42 @@ export default function Home() {
             </div>
           </header>
 
-          {/* NEW: Immersive Video Showcase Section */}
+          {/* Immersive Video Showcase Section */}
           <section style={{ maxWidth: '1000px', margin: '60px auto', padding: '0 20px', textAlign: 'center' }}>
             <span style={{ color: '#059669', fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase', fontWeight: 'bold' }}>Live Atmosphere</span>
             <h2 style={{ fontSize: '36px', color: '#997c17', margin: '10px 0 20px 0' }}>Experience the Mountain Mist & Glamping</h2>
             <div style={{ borderRadius: '24px', overflow: 'hidden', border: '2px solid rgba(212, 175, 55, 0.4)', boxShadow: '0 15px 35px rgba(0,0,0,0.1)', background: '#000' }}>
               <video autoPlay muted loop playsInline style={{ width: '100%', maxHeight: '500px', objectFit: 'cover', display: 'block' }}>
-                <source src="/video1.mp4" type="video/mp4" />
+                <source src="/vid 1.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </div>
           </section>
+
+          {/* HOME PAGE CONTINUOUS AUTO-PLAY VIDEO POPUPS */}
+          {showVideoPopup1 && (
+            <div style={{ position: 'fixed', bottom: '20px', left: '20px', width: '320px', background: '#fff', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.3)', zIndex: 999, border: '2px solid #d4af37' }}>
+              <div style={{ background: '#997c17', color: '#fff', padding: '8px 12px', fontSize: '13px', fontWeight: 'bold', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span>✨ Live View 1</span>
+                <button onClick={() => setShowVideoPopup1(false)} style={{ background: 'transparent', border: 'none', color: '#fff', fontSize: '16px', cursor: 'pointer' }}>×</button>
+              </div>
+              <video autoPlay muted loop playsInline style={{ width: '100%', height: '180px', objectFit: 'cover', display: 'block' }}>
+                <source src="/vid 1.mp4" type="video/mp4" />
+              </video>
+            </div>
+          )}
+
+          {showVideoPopup2 && (
+            <div style={{ position: 'fixed', bottom: '20px', right: '20px', width: '320px', background: '#fff', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.3)', zIndex: 999, border: '2px solid #06b6d4' }}>
+              <div style={{ background: '#0e7490', color: '#fff', padding: '8px 12px', fontSize: '13px', fontWeight: 'bold', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span>✨ Live View 2</span>
+                <button onClick={() => setShowVideoPopup2(false)} style={{ background: 'transparent', border: 'none', color: '#fff', fontSize: '16px', cursor: 'pointer' }}>×</button>
+              </div>
+              <video autoPlay muted loop playsInline style={{ width: '100%', height: '180px', objectFit: 'cover', display: 'block' }}>
+                <source src="/vid 2.mp4" type="video/mp4" />
+              </video>
+            </div>
+          )}
         </div>
       )}
 
@@ -204,16 +244,20 @@ export default function Home() {
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '25px' }}>
           
-          {/* Newly Added Bedroom Photo */}
+          {/* Added Additional Picture */}
+          <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
+            <img src="/add pic.jpg" alt="Additional Property Highlight" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
+            <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Resort Highlight View</div>
+          </div>
+
           <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
             <img src="/1000013872.jpg" alt="Neatly Made Luxury Bed Setup" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
             <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Cozy Interior Bed Setup</div>
           </div>
 
-          {/* Newly Added Second Video Walkthrough */}
           <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
             <video controls style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }}>
-              <source src="/video2.mp4" type="video/mp4" />
+              <source src="/vid 2.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Room & Property Video Tour</div>
@@ -376,37 +420,16 @@ export default function Home() {
             <h3 style={{ fontSize: '19px', fontWeight: 'bold', marginBottom: '12px', color: '#1a202c' }}>Serene & Safe Atmosphere</h3>
             <p style={{ color: '#4a5568', fontSize: '14px', lineHeight: '1.7', marginBottom: '20px' }}>"I stayed here to work remotely for 3 days. High-speed Wi-Fi worked smoothly, and the view from the desk was inspiring. Minor hiccup with hot water timing on day one, but staff resolved it quickly."</p>
             <div style={{ borderTop: '1px solid #edf2f7', paddingTop: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ color: '#059669', fontWeight: 'bold', fontSize: '14px' }}>— Sneha K.</span>
-              <span style={{ color: '#d97706', fontSize: '16px' }}>⭐⭐⭐ (3.5/5)</span>
-            </div>
-          </div>
-
-          <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', padding: '30px', borderRadius: '24px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '2px', color: '#0891b2', fontWeight: 'bold', display: 'block', marginBottom: '10px' }}>Anniversary Trip</span>
-            <h3 style={{ fontSize: '19px', fontWeight: 'bold', marginBottom: '12px', color: '#1a202c' }}>Unforgettable Romance in the Hills</h3>
-            <p style={{ color: '#4a5568', fontSize: '14px', lineHeight: '1.7', marginBottom: '20px' }}>"We celebrated our 5th wedding anniversary in the Teal Suite. The management arranged special lighting and flowers. Truly memorable!"</p>
-            <div style={{ borderTop: '1px solid #edf2f7', paddingTop: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ color: '#059669', fontWeight: 'bold', fontSize: '14px' }}>— Mohit & Ritu</span>
-              <span style={{ color: '#d97706', fontSize: '16px' }}>★★★★★</span>
+              <span style={{ color: '#059669', fontWeight: 'bold', fontSize: '14px' }}>— Rohan Mehra</span>
+              <span style={{ color: '#d97706', fontSize: '16px' }}>★★★★☆</span>
             </div>
           </div>
 
         </div>
       </section>
 
-      {/* Footer */}
-      <footer style={{ textAlign: 'center', padding: '40px', borderTop: '1px solid rgba(212, 175, 55, 0.3)', color: '#4a5568', fontSize: '14px', backgroundColor: '#f4f0e6' }}>
-        <p>© 2026 Amantra Hills Rishikesh. All Rights Reserved. Address: Neergarh Waterfall Rd, Narendra Nagar, Kurikhal, Uttarakhand 249201</p>
-      </footer>
-
-      {/* Chatbot & WhatsApp Direct Floating Widget */}
-      <div style={{ position: 'fixed', bottom: '25px', right: '25px', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'flex-end', fontFamily: 'serif' }}>
-        <a href="https://wa.me/919100009310?text=Hello%20Amantra%20Hills,%20I%20would%20like%20to%20inquire%20about%20availability." target="_blank" rel="noopener noreferrer" style={{ background: '#25D366', color: '#fff', padding: '14px 22px', borderRadius: '50px', fontWeight: 'bold', textDecoration: 'none', boxShadow: '0 4px 15px rgba(37, 211, 102, 0.4)', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '14px' }}>
-          💬 Chat on WhatsApp
-        </a>
-        <AIChatbot />
-      </div>
-
+      {/* AI Chatbot Component */}
+      <AIChatbot />
     </main>
   );
 }
