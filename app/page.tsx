@@ -35,7 +35,7 @@ export default function Home() {
     fetchData();
   }, []);
 
-  // Automatically trigger video popups on homepage mount (with slight staggering if desired, or both on load)
+  // Automatically trigger video popups on homepage mount
   useEffect(() => {
     if (activeTab === 'home') {
       const timer = setTimeout(() => {
@@ -251,7 +251,7 @@ export default function Home() {
           </div>
 
           <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/1000013872.jpg" alt="Neatly Made Luxury Bed Setup" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
+            <img src="/1000013867.jpg" alt="Cozy Interior Bed Setup" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
             <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Cozy Interior Bed Setup</div>
           </div>
 
