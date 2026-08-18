@@ -99,6 +99,18 @@ export default function Home() {
               </div>
             </div>
           </header>
+
+          {/* NEW: Immersive Video Showcase Section */}
+          <section style={{ maxWidth: '1000px', margin: '60px auto', padding: '0 20px', textAlign: 'center' }}>
+            <span style={{ color: '#059669', fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase', fontWeight: 'bold' }}>Live Atmosphere</span>
+            <h2 style={{ fontSize: '36px', color: '#997c17', margin: '10px 0 20px 0' }}>Experience the Mountain Mist & Glamping</h2>
+            <div style={{ borderRadius: '24px', overflow: 'hidden', border: '2px solid rgba(212, 175, 55, 0.4)', boxShadow: '0 15px 35px rgba(0,0,0,0.1)', background: '#000' }}>
+              <video autoPlay muted loop playsInline style={{ width: '100%', maxHeight: '500px', objectFit: 'cover', display: 'block' }}>
+                <source src="/video1.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </section>
         </div>
       )}
 
@@ -181,7 +193,7 @@ export default function Home() {
         </div>
       )}
 
-      {/* ================= RESTORED: RESORT PHOTO GALLERY SECTION ================= */}
+      {/* ================= RESORT PHOTO & MEDIA GALLERY SECTION ================= */}
       <section style={{ maxWidth: '1150px', margin: '80px auto', padding: '0 20px' }}>
         <div style={{ textAlign: 'center', marginBottom: '50px' }}>
           <h2 style={{ fontSize: '38px', color: '#997c17', marginBottom: '15px' }}>Resort Gallery & Domes</h2>
@@ -192,6 +204,21 @@ export default function Home() {
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '25px' }}>
           
+          {/* Newly Added Bedroom Photo */}
+          <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
+            <img src="/1000013872.jpg" alt="Neatly Made Luxury Bed Setup" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
+            <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Cozy Interior Bed Setup</div>
+          </div>
+
+          {/* Newly Added Second Video Walkthrough */}
+          <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
+            <video controls style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }}>
+              <source src="/video2.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Room & Property Video Tour</div>
+          </div>
+
           <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
             <img src="/home page image 2.jpg" alt="Nighttime City Panorama" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
             <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Nighttime Valley View</div>
@@ -374,27 +401,9 @@ export default function Home() {
 
       {/* Chatbot & WhatsApp Direct Floating Widget */}
       <div style={{ position: 'fixed', bottom: '25px', right: '25px', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'flex-end', fontFamily: 'serif' }}>
-        <a
-          href="https://wa.me/919100009310?text=Hi,%20I%20would%20like%20to%20check%20availability%20and%20book%20a%20stay%20at%20Amantra%20Hills%20Rishikesh."
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            background: 'linear-gradient(135deg, #22c55e, #16a34a)',
-            color: '#ffffff',
-            textDecoration: 'none',
-            borderRadius: '50px',
-            padding: '14px 24px',
-            fontSize: '14px',
-            fontWeight: 'bold',
-            boxShadow: '0 8px 25px rgba(34, 197, 94, 0.4)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-          }}
-        >
-          💬 Book via WhatsApp
+        <a href="https://wa.me/919100009310?text=Hello%20Amantra%20Hills,%20I%20would%20like%20to%20inquire%20about%20availability." target="_blank" rel="noopener noreferrer" style={{ background: '#25D366', color: '#fff', padding: '14px 22px', borderRadius: '50px', fontWeight: 'bold', textDecoration: 'none', boxShadow: '0 4px 15px rgba(37, 211, 102, 0.4)', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '14px' }}>
+          💬 Chat on WhatsApp
         </a>
-
         <AIChatbot />
       </div>
 
