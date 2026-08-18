@@ -6,6 +6,17 @@ import AIChatbot from '../components/AIChatbot';
 export default function Home() {
   const [activeTab, setActiveTab] = useState('home');
   const [content, setContent] = useState<any[]>([]);
+  
+  // Upgraded: Interactive Booking Form State
+  const [bookingData, setBookingData] = useState({
+    checkIn: '',
+    checkOut: '',
+    roomType: 'Geo AC Dome (Mountain View)',
+    guests: '2 Adults',
+    name: '',
+    phone: ''
+  });
+  const [bookingSubmitted, setBookingSubmitted] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -14,6 +25,13 @@ export default function Home() {
     }
     fetchData();
   }, []);
+
+  const handleBookingSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setBookingSubmitted(true);
+    const message = `Hello, I want to book a stay at Amantra Hills Rishikesh.%0A- Name: ${bookingData.name}%0A- Phone: ${bookingData.phone}%0A- Room: ${bookingData.roomType}%0A- Check-In: ${bookingData.checkIn}%0A- Check-Out: ${bookingData.checkOut}%0A- Guests: ${bookingData.guests}`;
+    window.open(`https://wa.me/919100009310?text=${message}`, '_blank');
+  };
 
   return (
     <main style={{ backgroundColor: '#fcfbf7', color: '#1a202c', minHeight: '100vh', fontFamily: 'serif', overflowX: 'hidden' }}>
@@ -29,11 +47,11 @@ export default function Home() {
           AMANTRA HILLS
         </div>
         <div style={{ display: 'flex', gap: '30px', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold' }}>
-          <span onClick={() => setActiveTab('home')} style={{ cursor: 'pointer', color: activeTab === 'home' ? '#0e7490' : '#4a5568', borderBottom: activeTab === 'home' ? '2px solid #06b6d4' : 'none', paddingBottom: '4px' }}>Home</span>
-          <span onClick={() => setActiveTab('dining')} style={{ cursor: 'pointer', color: activeTab === 'dining' ? '#0e7490' : '#4a5568', borderBottom: activeTab === 'dining' ? '2px solid #06b6d4' : 'none', paddingBottom: '4px' }}>Dining (Skywalk)</span>
-          <span onClick={() => setActiveTab('amenities')} style={{ cursor: 'pointer', color: activeTab === 'amenities' ? '#0e7490' : '#4a5568', borderBottom: activeTab === 'amenities' ? '2px solid #06b6d4' : 'none', paddingBottom: '4px' }}>Amenities</span>
-          <span onClick={() => setActiveTab('attractions')} style={{ cursor: 'pointer', color: activeTab === 'attractions' ? '#0e7490' : '#4a5568', borderBottom: activeTab === 'attractions' ? '2px solid #06b6d4' : 'none', paddingBottom: '4px' }}>Attractions</span>
-          <span onClick={() => setActiveTab('contact')} style={{ cursor: 'pointer', color: activeTab === 'contact' ? '#0e7490' : '#4a5568', borderBottom: activeTab === 'contact' ? '2px solid #06b6d4' : 'none', paddingBottom: '4px' }}>Contact</span>
+          <span onClick={() => setActiveTab('home')} style={{ cursor: 'pointer', color: activeTab === 'home' ? '#0e7490' : '#4a5568', borderBottom: activeTab === 'home' ? '2px solid #06b6d4' : 'none', paddingBottom: '4px', transition: 'all 0.3s' }}>Home</span>
+          <span onClick={() => setActiveTab('dining')} style={{ cursor: 'pointer', color: activeTab === 'dining' ? '#0e7490' : '#4a5568', borderBottom: activeTab === 'dining' ? '2px solid #06b6d4' : 'none', paddingBottom: '4px', transition: 'all 0.3s' }}>Dining (Skywalk)</span>
+          <span onClick={() => setActiveTab('amenities')} style={{ cursor: 'pointer', color: activeTab === 'amenities' ? '#0e7490' : '#4a5568', borderBottom: activeTab === 'amenities' ? '2px solid #06b6d4' : 'none', paddingBottom: '4px', transition: 'all 0.3s' }}>Amenities</span>
+          <span onClick={() => setActiveTab('attractions')} style={{ cursor: 'pointer', color: activeTab === 'attractions' ? '#0e7490' : '#4a5568', borderBottom: activeTab === 'attractions' ? '2px solid #06b6d4' : 'none', paddingBottom: '4px', transition: 'all 0.3s' }}>Attractions</span>
+          <span onClick={() => setActiveTab('contact')} style={{ cursor: 'pointer', color: activeTab === 'contact' ? '#0e7490' : '#4a5568', borderBottom: activeTab === 'contact' ? '2px solid #06b6d4' : 'none', paddingBottom: '4px', transition: 'all 0.3s' }}>Contact & Booking</span>
         </div>
       </nav>
 
@@ -61,7 +79,7 @@ export default function Home() {
                 Perched high in the majestic hills of Narendra Nagar, Amantra Hills offers an ethereal sanctuary where supreme modern luxury blends seamlessly with glowing mountain vistas, pristine dome architecture, and the tranquil breeze of the holy Himalayas.
               </p>
               <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
-                <button onClick={() => setActiveTab('contact')} style={{ background: 'linear-gradient(135deg, #d4af37, #b89728)', color: '#ffffff', fontWeight: 'bold', padding: '16px 36px', borderRadius: '50px', border: 'none', cursor: 'pointer', boxShadow: '0 4px 20px rgba(212, 175, 55, 0.4)', fontSize: '15px' }}>
+                <button onClick={() => setActiveTab('contact')} style={{ background: 'linear-gradient(135deg, #d4af37, #b89728)', color: '#ffffff', fontWeight: 'bold', padding: '16px 36px', borderRadius: '50px', border: 'none', cursor: 'pointer', boxShadow: '0 4px 20px rgba(212, 175, 55, 0.4)', fontSize: '15px', transition: 'transform 0.2s' }}>
                   Book Your Stay Now
                 </button>
                 <button onClick={() => setActiveTab('dining')} style={{ background: 'transparent', color: '#0891b2', border: '2px solid #0891b2', padding: '16px 36px', borderRadius: '50px', cursor: 'pointer', fontSize: '15px', fontWeight: 'bold', boxShadow: '0 4px 15px rgba(6, 182, 212, 0.2)' }}>
@@ -81,21 +99,21 @@ export default function Home() {
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px' }}>
-              <div style={{ background: '#ffffff', border: '1px solid rgba(6, 182, 212, 0.3)', padding: '40px', borderRadius: '28px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
+              <div style={{ background: '#ffffff', border: '1px solid rgba(6, 182, 212, 0.3)', padding: '40px', borderRadius: '28px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)', transition: 'transform 0.3s' }}>
                 <h3 style={{ color: '#0891b2', fontSize: '22px', marginBottom: '15px' }}>🏛️ Architectural Masterpiece</h3>
                 <p style={{ color: '#4a5568', fontSize: '15px', lineHeight: '1.8' }}>
                   Our signature geodesic glass-mirror domes provide a 360-degree panoramic view of the sparkling valley below and the star-studded night skies above, ensuring an experience of absolute wonder.
                 </p>
               </div>
 
-              <div style={{ background: '#ffffff', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '40px', borderRadius: '28px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
+              <div style={{ background: '#ffffff', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '40px', borderRadius: '28px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)', transition: 'transform 0.3s' }}>
                 <h3 style={{ color: '#059669', fontSize: '22px', marginBottom: '15px' }}>🌿 Impeccable Cleanliness</h3>
                 <p style={{ color: '#4a5568', fontSize: '15px', lineHeight: '1.8' }}>
                   We adhere to the highest international standards of hygiene and daily sanitization. Every pristine white linen, polished wooden floor, and glass panel gleams with perfection.
                 </p>
               </div>
 
-              <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.4)', padding: '40px', borderRadius: '28px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
+              <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.4)', padding: '40px', borderRadius: '28px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)', transition: 'transform 0.3s' }}>
                 <h3 style={{ color: '#997c17', fontSize: '22px', marginBottom: '15px' }}>☕ Skywalk Cafe Dining</h3>
                 <p style={{ color: '#4a5568', fontSize: '15px', lineHeight: '1.8' }}>
                   Perched right on the edge of the hill, our multi-cuisine eatery serves gourmet dishes crafted from farm-fresh local ingredients while you look out over sprawling garden views.
@@ -196,16 +214,56 @@ export default function Home() {
         </div>
       )}
 
-      {/* ================= CONTACT PAGE VIEW ================= */}
+      {/* ================= CONTACT PAGE VIEW (Upgraded with Interactive Booking Form) ================= */}
       {activeTab === 'contact' && (
         <div style={{ maxWidth: '1100px', margin: '60px auto', padding: '0 20px' }}>
-          <span style={{ color: '#059669', fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase', fontWeight: 'bold' }}>Get in Touch</span>
-          <h1 style={{ fontSize: '48px', color: '#997c17', margin: '15px 0 25px 0' }}>Contact & Reservations</h1>
+          <span style={{ color: '#059669', fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase', fontWeight: 'bold' }}>Get in Touch & Reserve</span>
+          <h1 style={{ fontSize: '48px', color: '#997c17', margin: '15px 0 25px 0' }}>Contact & Instant Booking Inquiry</h1>
           <p style={{ fontSize: '18px', color: '#2d3748', lineHeight: '1.9', marginBottom: '40px' }}>
             Our reservation desk is open 24/7 to assist you with room bookings, private events, customized travel itineraries, and special requests.
           </p>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px', marginBottom: '50px' }}>
+            {/* Interactive Booking Widget Form */}
+            <div style={{ background: '#ffffff', border: '2px solid rgba(212, 175, 55, 0.5)', padding: '35px', borderRadius: '25px', boxShadow: '0 10px 35px rgba(212, 175, 55, 0.15)', gridColumn: 'span 2' }}>
+              <h3 style={{ color: '#997c17', fontSize: '24px', marginBottom: '20px' }}>✨ Book Your Dome Stay Instantly</h3>
+              <form onSubmit={handleBookingSubmit} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '20px' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '14px', fontWeight: 'bold', color: '#4a5568', marginBottom: '8px' }}>Your Full Name</label>
+                  <input type="text" required placeholder="Priya Sharma" value={bookingData.name} onChange={(e) => setBookingData({...bookingData, name: e.target.value})} style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #cbd5e1', fontSize: '14px' }} />
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: '14px', fontWeight: 'bold', color: '#4a5568', marginBottom: '8px' }}>WhatsApp Mobile Number</label>
+                  <input type="tel" required placeholder="+91 98765 43210" value={bookingData.phone} onChange={(e) => setBookingData({...bookingData, phone: e.target.value})} style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #cbd5e1', fontSize: '14px' }} />
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: '14px', fontWeight: 'bold', color: '#4a5568', marginBottom: '8px' }}>Check-In Date</label>
+                  <input type="date" required value={bookingData.checkIn} onChange={(e) => setBookingData({...bookingData, checkIn: e.target.value})} style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #cbd5e1', fontSize: '14px' }} />
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: '14px', fontWeight: 'bold', color: '#4a5568', marginBottom: '8px' }}>Check-Out Date</label>
+                  <input type="date" required value={bookingData.checkOut} onChange={(e) => setBookingData({...bookingData, checkOut: e.target.value})} style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #cbd5e1', fontSize: '14px' }} />
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: '14px', fontWeight: 'bold', color: '#4a5568', marginBottom: '8px' }}>Room Suite Type</label>
+                  <select value={bookingData.roomType} onChange={(e) => setBookingData({...bookingData, roomType: e.target.value})} style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #cbd5e1', fontSize: '14px', background: '#fff' }}>
+                    <option>Geo AC Dome (Mountain View)</option>
+                    <option>Geo AC Dome (Rishikesh Valley View)</option>
+                  </select>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'flex-end' }}>
+                  <button type="submit" style={{ width: '100%', background: 'linear-gradient(135deg, #22c55e, #16a34a)', color: '#ffffff', fontWeight: 'bold', padding: '14px', borderRadius: '12px', border: 'none', cursor: 'pointer', boxShadow: '0 4px 15px rgba(34, 197, 94, 0.3)', fontSize: '15px' }}>
+                    🚀 Proceed to WhatsApp Booking
+                  </button>
+                </div>
+              </form>
+              {bookingSubmitted && (
+                <div style={{ marginTop: '15px', padding: '12px', background: '#f0fdf4', color: '#166534', borderRadius: '10px', fontSize: '14px', textAlign: 'center', fontWeight: 'bold' }}>
+                  ✅ Inquiry prepared! Redirecting you securely to our WhatsApp desk...
+                </div>
+              )}
+            </div>
+
             <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.4)', padding: '40px', borderRadius: '25px', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
               <h3 style={{ color: '#997c17', fontSize: '22px', marginBottom: '20px' }}>📞 Direct Helplines</h3>
               <p style={{ color: '#059669', fontSize: '18px', fontWeight: 'bold', lineHeight: '2' }}>
@@ -250,61 +308,61 @@ export default function Home() {
           
           {/* Image 1 */}
           <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/home page image 2.jpg" alt="Nighttime City Panorama" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
+            <img src="/home page image 2.jpg" alt="Nighttime City Panorama" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block', transition: 'transform 0.4s ease' }} />
             <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Nighttime Valley View</div>
           </div>
 
           {/* Image 2 */}
           <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/home page image 1.jpg" alt="Twilight Property Aerial" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
+            <img src="/home page image 1.jpg" alt="Twilight Property Aerial" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block', transition: 'transform 0.4s ease' }} />
             <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Twilight Aerial View</div>
           </div>
 
           {/* Image 3 */}
           <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/1000013862.jpg" alt="Misty Mountain Day View" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
+            <img src="/1000013862.jpg" alt="Misty Mountain Day View" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block', transition: 'transform 0.4s ease' }} />
             <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Misty Mountain Morning</div>
           </div>
 
           {/* Image 4 */}
           <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/1000013863.jpg" alt="Valley Outlook" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
+            <img src="/1000013863.jpg" alt="Valley Outlook" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block', transition: 'transform 0.4s ease' }} />
             <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Scenic Valley Outlook</div>
           </div>
 
           {/* Image 5 */}
           <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/1000013860.jpg" alt="Guest on Property" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
+            <img src="/1000013860.jpg" alt="Guest on Property" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block', transition: 'transform 0.4s ease' }} />
             <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Resort Grounds & Seating</div>
           </div>
 
           {/* Image 6 */}
           <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/1000013866.jpg" alt="Individual Dome Exterior" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
+            <img src="/1000013866.jpg" alt="Individual Dome Exterior" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block', transition: 'transform 0.4s ease' }} />
             <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Geodesic Dome Exterior</div>
           </div>
 
           {/* Image 7 */}
           <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/1000013867.jpg" alt="Yellow Dome Bed Setup" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
+            <img src="/1000013867.jpg" alt="Yellow Dome Bed Setup" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block', transition: 'transform 0.4s ease' }} />
             <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Yellow Suite Bed Setup</div>
           </div>
 
           {/* Image 8 */}
           <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/1000013859.jpg" alt="Yellow Dome Interior and Chairs" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
+            <img src="/1000013859.jpg" alt="Yellow Dome Interior and Chairs" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block', transition: 'transform 0.4s ease' }} />
             <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Yellow Suite Lounge Area</div>
           </div>
 
           {/* Image 9 */}
           <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/1000013865.jpg" alt="Teal Dome Bed and Seating" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
+            <img src="/1000013865.jpg" alt="Teal Dome Bed and Seating" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block', transition: 'transform 0.4s ease' }} />
             <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Teal Suite Master Bed</div>
           </div>
 
           {/* Image 10 */}
           <div style={{ background: '#ffffff', border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-            <img src="/1000013870.jpg" alt="Teal Dome Bedroom and Windows" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
+            <img src="/1000013870.jpg" alt="Teal Dome Bedroom and Windows" style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block', transition: 'transform 0.4s ease' }} />
             <div style={{ padding: '20px', fontWeight: 'bold', color: '#1a202c' }}>Teal Suite Panorama Windows</div>
           </div>
 
