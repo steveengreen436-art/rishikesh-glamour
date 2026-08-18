@@ -45,7 +45,7 @@ export default function Home() {
             position: 'relative', 
             padding: '140px 20px', 
             textAlign: 'center', 
-            backgroundImage: 'linear-gradient(rgba(252, 251, 247, 0.85), rgba(244, 240, 230, 0.9)), url("https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=2000")', 
+            backgroundImage: 'linear-gradient(rgba(252, 251, 247, 0.85), rgba(244, 240, 230, 0.9)), url("/best background.jpg")', 
             backgroundSize: 'cover', 
             backgroundPosition: 'center',
             borderBottom: '2px solid rgba(212, 175, 55, 0.3)'
