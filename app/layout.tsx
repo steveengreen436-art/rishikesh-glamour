@@ -1,6 +1,6 @@
 export const metadata = {
-  title: 'Rishikesh Majesty | Luxury Hotel',
-  description: 'Where supreme modern luxury meets the timeless flow of the holy Ganges.',
+  title: 'Amantra Hills Rishikesh | Luxury Hotel & Geodesic Domes',
+  description: 'Experience supreme modern luxury and glowing mountain vistas at Amantra Hills Rishikesh, located in Narendra Nagar, Uttarakhand.',
 };
 
 export default function RootLayout({
