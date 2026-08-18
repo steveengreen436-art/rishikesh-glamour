@@ -1,82 +1,252 @@
-'use client'
-import { useState } from 'react';
+'use client';
+import { useState, useRef, useEffect } from 'react';
 
 export default function AIChatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { sender: 'ai', text: 'Namaste! 🙏 Welcome to Rishikesh Majesty. How can I help you experience luxury by the Ganges today? (Ask in English, Hindi, or Punjabi!)' }
+    { 
+      sender: 'bot', 
+      text: "⚡ Boom! **SkyWalker** is online. Forget boring bots—I'm your hyper-smart, slightly sarcastic digital concierge here at Amantra Hills, Narendra Nagar. What's the mission today? Booking a geodesic dome, hunting down the best coffee at Skywalk Cafe, or just testing my IQ? Fire away! (English, हिन्दी, ਪੰਜਾਬੀ all welcome!)" 
+    }
   ]);
   const [input, setInput] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const handleSend = async () => {
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isTyping]);
+
+  const handleSend = (e: React.FormEvent) => {
+    e.preventDefault();
     if (!input.trim()) return;
 
-    const userText = input;
+    const userMessage = input.trim();
+    setMessages((prev) => [...prev, { sender: 'user', text: userMessage }]);
     setInput('');
-    setMessages((prev) => [...prev, { sender: 'user', text: userText }]);
-    setLoading(true);
+    setIsTyping(true);
 
-    // Smart context-aware responses matching English, Hindi, and Punjabi keywords
+    // Intelligent response delay for realism
     setTimeout(() => {
-      let reply = "I would love to help you with that! For bookings and personalized romantic getaways, please call our front desk or check our luxury suites.";
-      
-      const lower = userText.toLowerCase();
+      let botReply = getSkyWalkerSmartReply(userMessage);
+      setMessages((prev) => [...prev, { sender: 'bot', text: botReply }]);
+      setIsTyping(false);
+    }, 800);
+  };
 
-      // Hindi / Punjabi & English Smart Matching
-      if (lower.includes('hindi') || lower.includes('namaste') || lower.includes('kamra') || lower.includes('price') || lower.includes('रुपये') || lower.includes('कमरा')) {
-        reply = "नमस्ते! Rishikesh Majesty में आपका स्वागत है। हमारे पास गंगा किनारे सबसे शानदार और आधुनिक कमरे हैं। एक रात का किराया लगभग ₹12,000 से शुरू होता है जिसमें ब्रेकफास्ट शामिल है। क्या आप बुकिंग करना चाहते हैं?";
-      } else if (lower.includes('punjabi') || lower.includes('sat sri akal') || lower.includes('kamre') || lower.includes('ki haal')) {
-        reply = "सत श्री अकाल जी! Rishikesh Majesty विच आपका स्वागत है। साਡੇ ਕੋਲ Ganga ਦੇ کنਾਰੇ ਬਹੁਤ ਹੀ ਸ਼ਾਨदार room ਹਨ। ਕੀ ਤੁਸੀਂ romantic getaway book ਕਰਨਾ چاہندے ہو؟";
-      } else if (lower.includes('romantic') || lower.includes('couple') || lower.includes('honeymoon')) {
-        reply = "Our Romantic Getaway package is breathtaking! It includes a private candle-lit dinner by the Ganges, rose petal room decoration, couples spa, and mountain-view suite for ₹25,000/night.";
-      } else if (lower.includes('yoga') || lower.includes('meditation') || lower.includes('ganga')) {
-        reply = "Rishikesh is the yoga capital of the world! We offer private sunrise yoga sessions right on the banks of the Ganges with master gurus, completely free for our resort guests.";
-      } else if (lower.includes('food') || lower.includes('restaurant') || lower.includes('eat') || lower.includes('khana')) {
-        reply = "Our multi-cuisine rooftop restaurant 'Tranquility' serves organic, farm-to-table gourmet vegetarian cuisine overlooking the holy river and the mountains.";
-      }
+  const getSkyWalkerSmartReply = (query: string) => {
+    const q = query.toLowerCase();
 
-      setMessages((prev) => [...prev, { sender: 'ai', text: reply }]);
-      setLoading(false);
-    }, 1000);
+    if (q.includes('hello') || q.includes('hi') || q.includes('hey') || q.includes('namaste')) {
+      return "Well look who decided to drop by! 👋 Welcome to my domain. How can SkyWalker upgrade your Himalayan escape right now?";
+    }
+    if (q.includes('price') || q.includes('cost') || q.includes('rate') || q.includes('book') || q.includes('stay')) {
+      return "💸 Wanting that VIP mountain view? Our rates depend on whether you choose a plush geodesic dome suite or standard luxury. Skip the guesswork and dial our direct VIP line right now: **+91 9100009310**!";
+    }
+    if (q.includes('food') || q.includes('cafe') || q.includes('eat') || q.includes('restaurant') || q.includes('coffee')) {
+      return "☕ Ah, the famous **Skywalk Cafe**! It's cantilevered over the ridge so you can sip artisanal coffee while floating above the clouds. Pro tip: Try the wood-fired pizza and watch the valley lights turn on at dusk.";
+    }
+    if (q.includes('wifi') || q.includes('internet') || q.includes('work')) {
+      return "📶 Blazing fast fiber optic Wi-Fi across the entire property. Whether you're actually closing business deals or just flexing your mountain reels on Instagram, you won't experience a single lag.";
+    }
+    if (q.includes('joke') || q.includes('funny') || q.includes('laugh')) {
+      return "🤖 Why do mountain resorts make terrible secret agents? Because no matter what, they always end up *peaking*! ...Hey, I'm a luxury concierge, not a comedy club headliner, but I bring the entertainment!";
+    }
+    if (q.includes('location') || q.includes('address') || q.includes('where') || q.includes('reach')) {
+      return "🗺️ We are perched high up at Narendra Nagar (Kurikhal, Uttarakhand 249201), near the gorgeous Neergarh Waterfall road. Clean mountain air, zero city pollution, 100% pure vibe.";
+    }
+    if (q.includes('waterfall') || q.includes('attraction') || q.includes('sight') || q.includes('temple')) {
+      return "🌊 You're just a short trip away from the stunning Neer Waterfall (~6.2 km) and the legendary sunrise views at Kunjapuri Temple (~14.4 km). Want me to have our front desk arrange a cab for you?";
+    }
+
+    // Dynamic adaptive responses so she never sounds repetitive or robotic
+    const smartFallbacks = [
+      "🧠 That's a unique query! While I'm a genius, for exact custom arrangements, our human team is lightning fast. Call our hotline at **+91 9873767624**!",
+      "✨ Ooh, plot twist! That's a new one for my database. Let's get you sorted—are you looking into our glass domes, our dining options, or local trekking spots?",
+      "🎯 You're keeping me on my toes today! Drop a line to our reservations manager at **+91 9811167624** or ask me about our cafe, amenities, or rooms.",
+      "⚡ Sharp question! My neural nets are buzzing. Do you want more details on the Skywalk Cafe menu or our panoramic rooftop terrace?"
+    ];
+    
+    return smartFallbacks[Math.floor(Math.random() * smartFallbacks.length)];
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div style={{ position: 'fixed', bottom: '25px', right: '25px', zIndex: 1000, fontFamily: 'serif' }}>
       {!isOpen ? (
-        <button 
+        <button
           onClick={() => setIsOpen(true)}
-          className="bg-gradient-to-r from-cyan-400 to-purple-600 text-black font-bold px-6 py-4 rounded-full shadow-[0_0_30px_rgba(34,211,238,0.6)] hover:scale-105 transition-all flex items-center gap-2"
+          style={{
+            background: 'linear-gradient(135deg, #06b6d4, #3b82f6, #d4af37)',
+            color: '#ffffff',
+            border: 'none',
+            borderRadius: '50px',
+            padding: '16px 28px',
+            fontSize: '15px',
+            fontWeight: 'bold',
+            cursor: 'pointer',
+            boxShadow: '0 10px 30px rgba(6, 182, 212, 0.45)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            transition: 'transform 0.2s ease',
+          }}
         >
-          ✨ Chat with Rishikesh AI
+          ⚡ Chat with SkyWalker AI
         </button>
       ) : (
-        <div className="bg-gray-950 border border-cyan-500/50 w-80 md:w-96 h-[500px] rounded-3xl shadow-[0_0_40px_rgba(34,211,238,0.3)] flex flex-col overflow-hidden">
-          <div className="bg-gradient-to-r from-cyan-900 to-purple-900 p-4 flex justify-between items-center border-b border-cyan-500/30">
-            <h3 className="font-bold text-cyan-300">Majesty AI Concierge 🇮🇳</h3>
-            <button onClick={() => setIsOpen(false)} className="text-gray-400 hover:text-white font-bold">✕</button>
-          </div>
-          
-          <div className="flex-1 p-4 overflow-y-auto space-y-3">
-            {messages.map((m, idx) => (
-              <div key={idx} className={`p-3 rounded-2xl text-sm max-w-[85%] ${m.sender === 'user' ? 'bg-cyan-500 text-black ml-auto font-medium' : 'bg-gray-900 text-gray-200 border border-gray-800'}`}>
-                {m.text}
+        <div
+          style={{
+            width: '380px',
+            height: '540px',
+            backgroundColor: '#ffffff',
+            borderRadius: '24px',
+            boxShadow: '0 15px 45px rgba(0,0,0,0.2)',
+            display: 'flex',
+            flexDirection: 'column',
+            border: '1px solid rgba(212, 175, 55, 0.5)',
+            overflow: 'hidden',
+          }}
+        >
+          {/* Header */}
+          <div
+            style={{
+              background: 'linear-gradient(135deg, #0f172a, #1e293b)',
+              color: '#ffffff',
+              padding: '16px 20px',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              borderBottom: '2px solid #d4af37',
+            }}
+          >
+            <div>
+              <div style={{ fontWeight: 'bold', fontSize: '16px', color: '#38bdf8', letterSpacing: '1px' }}>
+                ⚡ SkyWalker AI
               </div>
-            ))}
-            {loading && <div className="text-xs text-cyan-400 italic animate-pulse">AI is typing in English/Hindi/Punjabi...</div>}
+              <div style={{ fontSize: '11px', color: '#94a3b8' }}>
+                Amantra Hills Elite Concierge
+              </div>
+            </div>
+            <button
+              onClick={() => setIsOpen(false)}
+              style={{
+                background: 'rgba(255,255,255,0.1)',
+                border: 'none',
+                color: '#ffffff',
+                width: '30px',
+                height: '30px',
+                borderRadius: '50%',
+                cursor: 'pointer',
+                fontSize: '14px',
+                fontWeight: 'bold',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              ✕
+            </button>
           </div>
 
-          <div className="p-3 border-t border-gray-800 flex gap-2 bg-black">
-            <input 
-              type="text" 
+          {/* Messages Area */}
+          <div
+            style={{
+              flex: 1,
+              padding: '18px',
+              overflowY: 'auto',
+              backgroundColor: '#f8fafc',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '14px',
+            }}
+          >
+            {messages.map((msg, index) => (
+              <div
+                key={index}
+                style={{
+                  alignSelf: msg.sender === 'user' ? 'flex-end' : 'flex-start',
+                  maxWidth: '84%',
+                  backgroundColor: msg.sender === 'user' ? '#0891b2' : '#ffffff',
+                  color: msg.sender === 'user' ? '#ffffff' : '#1e293b',
+                  padding: '12px 16px',
+                  borderRadius: msg.sender === 'user' ? '18px 18px 4px 18px' : '18px 18px 18px 4px',
+                  fontSize: '14px',
+                  lineHeight: '1.6',
+                  boxShadow: msg.sender === 'bot' ? '0 3px 12px rgba(0,0,0,0.05)' : 'none',
+                  border: msg.sender === 'bot' ? '1px solid #e2e8f0' : 'none',
+                }}
+              >
+                {msg.text}
+              </div>
+            ))}
+            {isTyping && (
+              <div
+                style={{
+                  alignSelf: 'flex-start',
+                  backgroundColor: '#ffffff',
+                  color: '#0891b2',
+                  padding: '10px 14px',
+                  borderRadius: '16px',
+                  fontSize: '13px',
+                  fontStyle: 'italic',
+                  border: '1px solid #e2e8f0',
+                  boxShadow: '0 2px 5px rgba(0,0,0,0.02)',
+                }}
+              >
+                ⚡ SkyWalker is computing a brilliant reply...
+              </div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
+
+          {/* Input Box */}
+          <form
+            onSubmit={handleSend}
+            style={{
+              padding: '12px',
+              backgroundColor: '#ffffff',
+              borderTop: '1px solid #e2e8f0',
+              display: 'flex',
+              gap: '8px',
+            }}
+          >
+            <input
+              type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-              placeholder="Ask in English, हिन्दी, or ਪੰਜਾਬੀ..." 
-              className="flex-1 bg-gray-900 text-white px-4 py-2 rounded-xl text-sm border border-gray-800 focus:outline-none focus:border-cyan-400"
+              placeholder="Ask SkyWalker anything..."
+              style={{
+                flex: 1,
+                padding: '10px 14px',
+                borderRadius: '20px',
+                border: '1px solid #cbd5e1',
+                outline: 'none',
+                fontSize: '14px',
+                backgroundColor: '#f8fafc',
+                color: '#0f172a',
+              }}
             />
-            <button onClick={handleSend} className="bg-cyan-400 text-black px-4 py-2 rounded-xl text-sm font-bold hover:bg-cyan-300">Send</button>
-          </div>
+            <button
+              type="submit"
+              style={{
+                background: 'linear-gradient(135deg, #0891b2, #0e7490)',
+                color: '#ffffff',
+                border: 'none',
+                borderRadius: '20px',
+                padding: '0 18px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                fontSize: '13px',
+                boxShadow: '0 2px 8px rgba(8, 145, 178, 0.3)',
+              }}
+            >
+              Send
+            </button>
+          </form>
         </div>
       )}
     </div>
